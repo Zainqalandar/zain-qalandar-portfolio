@@ -1,11 +1,6 @@
 'use client'
 import { motion } from 'framer-motion'
-
-const skills = [
-  'JavaScript (ES6+)', 'React.js', 'Next.js', 'Node.js', 'Express', 
-  'MongoDB', 'Tailwind CSS', 'Redux Toolkit', 'MUI', 
-  'Appwrite', 'Git', 'Vercel'
-]
+import skills from '@/data/skills.json'
 
 export default function Skills() {
   return (

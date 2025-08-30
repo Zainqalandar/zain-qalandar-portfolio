@@ -1,20 +1,6 @@
 'use client'
 import { motion } from 'framer-motion'
-
-const projects = [
-  {
-    title: 'MERN E-Commerce',
-    desc: 'Product CRUD, authentication (JWT), order flow, Redux state management.',
-    tech: ['MongoDB','Express','React','Node','Tailwind'],
-    link: '#'
-  },
-  {
-    title: 'Web-Kayana (Frontend)',
-    desc: 'Converted Figma designs to Next.js and Chakra UI components for KodeStudio.',
-    tech: ['Next.js','Chakra UI','Axios'],
-    link: 'https://hirekayana.com'
-  }
-]
+import projects from '@/data/projects.json'
 
 export default function Projects() {
   return (

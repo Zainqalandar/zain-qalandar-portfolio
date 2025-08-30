@@ -38,14 +38,14 @@ const handleSubmit = (e) => {
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="Your name"
-            className="p-3 rounded-xl border shadow-sm focus:ring-2 focus:ring-green-400 outline-none"
+            className="p-3 rounded-xl border border-green-200 shadow-sm focus:ring-2 focus:ring-green-400 outline-none"
           />
           <input
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Email"
-            className="p-3 rounded-xl border shadow-sm focus:ring-2 focus:ring-green-400 outline-none"
+            className="p-3 rounded-xl border border-green-200 shadow-sm focus:ring-2 focus:ring-green-400 outline-none"
           />
           <textarea
             required
@@ -53,7 +53,7 @@ const handleSubmit = (e) => {
             onChange={(e) => setMsg(e.target.value)}
             placeholder="Message"
             rows={5}
-            className="p-3 rounded-xl border shadow-sm focus:ring-2 focus:ring-green-400 outline-none md:col-span-2"
+            className="p-3 rounded-xl border border-green-200 shadow-sm focus:ring-2 focus:ring-green-400 outline-none md:col-span-2"
           />
           <button
             type="submit"

@@ -13,12 +13,9 @@ export default function Home() {
 				<Header />
 				<main className="max-w-5xl mx-auto px-6 py-12 w-full">
 					<Hero />
-					{/* <div className="h-[400] w-[400]">
-						<h1 className=" text-brand-500">Hello world</h1>
-						<button className="bg-brand-500 text-white p-4 rounded animate-float">
-							Test Button
-						</button>
-					</div> */}
+					{/* <button className="bg-brand-500 text-white p-4 rounded animate-float">
+						Test Button
+					</button> */}
 					<About />
 					<Skills />
 					<Projects />
