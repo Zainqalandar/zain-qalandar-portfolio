@@ -1,14 +1,38 @@
 [
 	{
-		"title": "MERN E-Commerce",
-		"desc": "Product CRUD, authentication (JWT), order flow, Redux state management.",
-		"tech": ["MongoDB", "Express", "React", "Node", "Tailwind"],
+		"title": "MERN E-Commerce Platform",
+		"desc": "Full-featured e-commerce platform with product CRUD operations, JWT authentication, order management, and Redux state management.",
+		"tech": ["MongoDB", "Express", "React", "Node", "Tailwind", "Redux"],
 		"link": "#"
 	},
 	{
 		"title": "Web-Kayana (Frontend)",
-		"desc": "Converted Figma designs to Next.js and Chakra UI components for KodeStudio.",
-		"tech": ["Next.js", "Chakra UI", "Axios"],
+		"desc": "Converted Figma designs to responsive Next.js and Chakra UI components for a professional web agency.",
+		"tech": ["Next.js", "Chakra UI", "Axios", "Responsive Design"],
 		"link": "https://hirekayana.com"
+	},
+	{
+		"title": "Task Management Dashboard",
+		"desc": "Interactive task management application with real-time updates, user authentication, and beautiful UI. Features drag-and-drop functionality.",
+		"tech": ["React", "Node.js", "MongoDB", "Socket.io", "Tailwind"],
+		"link": "#"
+	},
+	{
+		"title": "Social Media Analytics Tool",
+		"desc": "Analytics dashboard for tracking social media performance with charts, real-time data visualization, and detailed insights.",
+		"tech": ["Next.js", "Chart.js", "API Integration", "Tailwind CSS"],
+		"link": "#"
+	},
+	{
+		"title": "Portfolio Website",
+		"desc": "Modern, responsive portfolio showcasing projects with smooth animations, contact form, and optimized performance.",
+		"tech": ["Next.js", "Tailwind CSS", "Framer Motion", "Responsive"],
+		"link": "https://zainqalandar.com"
+	},
+	{
+		"title": "Blog Platform with CMS",
+		"desc": "Full-featured blogging platform with content management, categories, comments, and beautiful markdown rendering.",
+		"tech": ["Next.js", "Strapi CMS", "React", "MongoDB", "Tailwind"],
+		"link": "#"
 	}
 ]

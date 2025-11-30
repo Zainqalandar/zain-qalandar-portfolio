@@ -1,31 +1,177 @@
 'use client'
-import { Github, Instagram } from 'lucide-react'
+import { Github, Instagram, Mail, Heart, ArrowUp } from 'lucide-react'
+import { motion } from 'framer-motion'
 
 export default function Footer() {
-  return (
-    <footer className="mt-16 bg-white/70 backdrop-blur-md border-t shadow-sm">
-      <div className="max-w-6xl mx-auto px-6 py-6 flex flex-col md:flex-row justify-between items-center gap-4">
-        <div className="text-sm text-gray-600">
-          © {new Date().getFullYear()} Syed Zain Qalandar
-        </div>
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
 
-        <div className="flex gap-5 text-sm items-center">
-          <a
-            href="https://instagram.com/zainqalandar.brand"
-            target="_blank"
-            className="flex items-center gap-1 hover:text-pink-500 transition-colors"
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.1,
+      },
+    },
+  }
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 10 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        type: 'spring',
+        stiffness: 100,
+        damping: 15,
+      },
+    },
+  }
+
+  return (
+    <footer className="relative z-10 mt-20">
+      {/* Gradient divider */}
+      <motion.div
+        initial={{ scaleX: 0 }}
+        whileInView={{ scaleX: 1 }}
+        transition={{ duration: 0.8 }}
+        className="h-px bg-gradient-to-r from-transparent via-green-500/50 to-transparent origin-left"
+      />
+
+      <div className="glass-effect border-t border-white/10 backdrop-blur-xl">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="max-w-6xl mx-auto px-6 py-12 md:py-16"
+        >
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+            {/* Brand Section */}
+            <motion.div variants={itemVariants} className="flex flex-col items-center md:items-start">
+              <h3 className="text-2xl font-poppins font-bold bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent mb-2">
+                Syed Zain Qalandar
+              </h3>
+              <p className="text-gray-300 text-sm font-inter">
+                Full Stack Developer & Creative Builder
+              </p>
+              <motion.div
+                animate={{ y: [0, -5, 0] }}
+                transition={{ duration: 3, repeat: Infinity }}
+                className="mt-3 text-green-400"
+              >
+                <Heart size={16} fill="currentColor" />
+              </motion.div>
+            </motion.div>
+
+            {/* Quick Links */}
+            <motion.div variants={itemVariants} className="flex flex-col items-center">
+              <h4 className="text-white font-poppins font-semibold mb-4">Quick Links</h4>
+              <div className="space-y-2 text-center">
+                <a href="#about" className="block text-gray-300 hover:text-green-400 transition-colors text-sm font-inter">
+                  About
+                </a>
+                <a href="#projects" className="block text-gray-300 hover:text-green-400 transition-colors text-sm font-inter">
+                  Projects
+                </a>
+                <a href="#contact" className="block text-gray-300 hover:text-green-400 transition-colors text-sm font-inter">
+                  Contact
+                </a>
+              </div>
+            </motion.div>
+
+            {/* Social Links */}
+            <motion.div variants={itemVariants} className="flex flex-col items-center md:items-end">
+              <h4 className="text-white font-poppins font-semibold mb-4">Follow</h4>
+              <motion.div
+                className="flex gap-4"
+                variants={containerVariants}
+                initial="hidden"
+                animate="visible"
+              >
+                <motion.a
+                  variants={itemVariants}
+                  href="mailto:bsitf21e68406@gcbskp.edu.pk"
+                  whileHover={{ scale: 1.1, rotate: 10 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="p-3 rounded-lg border border-white/20 text-gray-400 hover:text-green-400 hover:border-green-500/50 transition-all duration-300"
+                  title="Email"
+                >
+                  <Mail size={18} />
+                </motion.a>
+                <motion.a
+                  variants={itemVariants}
+                  href="https://instagram.com/zainqalandar.brand"
+                  target="_blank"
+                  whileHover={{ scale: 1.1, rotate: 10 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="p-3 rounded-lg border border-white/20 text-gray-400 hover:text-pink-400 hover:border-pink-500/50 transition-all duration-300"
+                  title="Instagram"
+                >
+                  <Instagram size={18} />
+                </motion.a>
+                <motion.a
+                  variants={itemVariants}
+                  href="https://github.com/Zainqalandar"
+                  target="_blank"
+                  whileHover={{ scale: 1.1, rotate: 10 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="p-3 rounded-lg border border-white/20 text-gray-400 hover:text-white hover:border-white/50 transition-all duration-300"
+                  title="GitHub"
+                >
+                  <Github size={18} />
+                </motion.a>
+              </motion.div>
+            </motion.div>
+          </div>
+
+          {/* Bottom Section */}
+          <motion.div
+            variants={itemVariants}
+            className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4"
           >
-            <Instagram size={16} /> Instagram
-          </a>
-          <a
-            href="https://github.com/Zainqalandar"
-            target="_blank"
-            className="flex items-center gap-1 hover:text-gray-900 transition-colors"
-          >
-            <Github size={16} /> GitHub
-          </a>
-        </div>
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ delay: 0.5 }}
+              className="text-sm text-gray-300 font-inter"
+            >
+              © {new Date().getFullYear()} Syed Zain Qalandar. All rights reserved.
+            </motion.div>
+
+            <motion.div
+              className="flex items-center gap-2 text-xs text-gray-400 font-inter"
+              animate={{ opacity: [0.5, 1, 0.5] }}
+              transition={{ duration: 3, repeat: Infinity }}
+            >
+              <span>Made with</span>
+              <Heart size={14} className="text-green-400" fill="currentColor" />
+              <span>using Next.js & Framer Motion</span>
+            </motion.div>
+
+            {/* Scroll to Top */}
+            <motion.button
+              onClick={scrollToTop}
+              whileHover={{ scale: 1.1, y: -5 }}
+              whileTap={{ scale: 0.95 }}
+              className="p-3 rounded-lg border border-white/20 text-gray-300 hover:text-green-400 hover:border-green-500/50 transition-all duration-300"
+              title="Back to top"
+            >
+              <ArrowUp size={18} />
+            </motion.button>
+          </motion.div>
+        </motion.div>
       </div>
+
+      {/* Floating background elements */}
+      <motion.div
+        animate={{ opacity: [0.3, 0.1, 0.3] }}
+        transition={{ duration: 5, repeat: Infinity }}
+        className="absolute bottom-0 left-0 w-96 h-96 bg-green-500/5 rounded-full blur-3xl -z-10"
+      />
     </footer>
   )
 }
