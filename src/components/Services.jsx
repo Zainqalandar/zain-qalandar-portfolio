@@ -37,7 +37,8 @@ export default function Services() {
 				whileInView={{ opacity: 1, y: 0 }}
 				transition={{ duration: 0.5 }}
 				viewport={{ once: true }}
-				className="section-title mb-12 text-center"
+				style={{ marginBottom: 32 }}
+				className="section-title mb-24 text-center"
 			>
 				Services & Expertise
 			</motion.h2>
@@ -65,13 +66,13 @@ export default function Services() {
 							}}
 							className="glass-effect rounded-2xl p-8 card-hover group"
 						>
-							<div className="w-14 h-14 rounded-xl bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+							<div className="w-14 h-14 rounded-xl bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform shadow-lg">
 								<Icon className="text-white" size={28} />
 							</div>
-							<h3 className="text-xl font-bold text-gray-900 mb-3">
+							<h3 className="text-xl font-bold text-gray-100 dark:text-white mb-3">
 								{service.title}
 							</h3>
-							<p className="text-gray-700 leading-relaxed">
+							<p className="text-gray-300 dark:text-gray-400 leading-relaxed">
 								{service.description}
 							</p>
 						</motion.div>

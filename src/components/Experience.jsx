@@ -71,6 +71,9 @@ export default function Experience() {
 							<div className="flex flex-wrap gap-2">
 								{exp.skills.map((skill) => (
 									<span
+									style={{
+										color: 'green',
+									}}
 										key={skill}
 										className="text-xs px-3 py-1 rounded-full bg-green-100 text-green-700 font-medium"
 									>

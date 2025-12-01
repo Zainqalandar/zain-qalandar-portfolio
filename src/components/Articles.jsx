@@ -40,6 +40,7 @@ export default function Articles() {
 				whileInView={{ opacity: 1, y: 0 }}
 				transition={{ duration: 0.5 }}
 				viewport={{ once: true }}
+				style={{ marginBottom: 32 }}
 				className="section-title mb-12 text-center"
 			>
 				Latest Articles
@@ -68,7 +69,9 @@ export default function Articles() {
 					>
 						{/* Category badge */}
 						<div className="px-6 pt-6 flex items-start justify-between">
-							<span className="text-xs font-bold px-3 py-1 rounded-full bg-gradient-to-r from-green-100 to-emerald-100 text-green-700">
+							<span
+							 style={{ color: 'green',}}
+							 className="text-xs font-bold px-3 py-1 rounded-full bg-gradient-to-r from-green-100 to-emerald-100 text-green-700">
 								{article.category}
 							</span>
 						</div>
@@ -114,7 +117,7 @@ export default function Articles() {
 			>
 				<a
 					href="#"
-					className="inline-flex items-center gap-2 btn-primary"
+					className="inline-flex items-center gap-2 btn-primary text-white"
 				>
 					View All Articles
 					<ArrowRight size={20} />

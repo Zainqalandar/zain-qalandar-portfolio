@@ -154,7 +154,7 @@ export default function Header() {
 						animate={{ opacity: 1, y: 0, height: 'auto' }}
 						exit={{ opacity: 0, y: -20, height: 0 }}
 						transition={{ duration: 0.3 }}
-						className="md:hidden border-t border-white/10 bg-slate-900/95 backdrop-blur-xl overflow-hidden"
+						className="md:hidden fixed inset-x-0 top-16 z-[9999] border-t border-white/10 bg-slate-900/95 backdrop-blur-xl overflow-hidden"
 					>
 						<motion.div
 							className="px-6 py-6 flex flex-col gap-3"

@@ -59,7 +59,7 @@ export default function Hero() {
 							<motion.div
 								whileHover={{ scale: 1.1, rotate: 5 }}
 								transition={{ type: 'spring', stiffness: 200 }}
-								className="w-24 h-24 sm:w-32 sm:h-32 rounded-full overflow-hidden ring-4 ring-green-400 shadow-2xl glow-element"
+								className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 rounded-full overflow-hidden ring-4 ring-green-400 shadow-2xl glow-element flex-shrink-0"
 							>
 								<Image
 									src="/images/profile.png"
@@ -67,6 +67,7 @@ export default function Hero() {
 									width={128}
 									height={128}
 									className="w-full h-full object-cover"
+									priority
 								/>
 							</motion.div>
 							<motion.div variants={itemVariants}>
@@ -119,9 +120,9 @@ export default function Hero() {
 								href="mailto:bsitf21e68406@gcbskp.edu.pk"
 								whileHover={{ scale: 1.05 }}
 								whileTap={{ scale: 0.95 }}
-								className="btn-primary flex items-center gap-2 font-poppins"
+								className="btn-primary flex items-center gap-2 font-poppins !text-white hover:!text-white transition-colors"
 							>
-								<Mail size={18} className="icon-primary" /> Email Me
+								<Mail size={16} color="white" className="icon-primary" /> Email Me
 							</motion.a>
 							<motion.a
 								href="https://github.com/Zainqalandar"
@@ -131,7 +132,7 @@ export default function Hero() {
 								className="glass-effect flex items-center gap-2 px-6 py-3 rounded-lg border border-green-500/50 text-green-300 font-poppins font-semibold hover:border-green-400 hover:text-white transition-all"
 							>
 								<Github size={18} className="icon-secondary" /> GitHub
-								<ArrowRight size={16} />
+								<ArrowRight size={14} />
 							</motion.a>
 							<motion.a
 								href="https://www.linkedin.com/in/zainqalandar"
@@ -140,7 +141,7 @@ export default function Hero() {
 								whileTap={{ scale: 0.95 }}
 								className="glass-effect flex items-center gap-2 px-6 py-3 rounded-lg border border-blue-500/50 text-blue-300 font-poppins font-semibold hover:border-blue-400 hover:text-white transition-all"
 							>
-								<Linkedin size={18} className="icon-accent" /> LinkedIn
+								<Linkedin size={16} className="icon-accent text-white" /> LinkedIn
 							</motion.a>
 						</motion.div>
 					</div>
