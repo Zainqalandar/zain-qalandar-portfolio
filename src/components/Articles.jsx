@@ -87,8 +87,8 @@ export default function Articles() {
 						</div>
 
 						{/* Meta */}
-						<div className="px-6 pb-4 border-t border-white/20">
-							<div className="flex items-center gap-4 text-xs text-gray-600 mb-4">
+						<div className="px-6 pb-4 pt-2 border-t border-white/20">
+							<div className="flex items-center gap-4 text-xs text-green-900 mb-4">
 								<div className="flex items-center gap-1">
 									<Calendar size={14} />
 									{article.date}
@@ -98,7 +98,7 @@ export default function Articles() {
 
 							<a
 								href="#"
-								className="inline-flex items-center gap-2 text-green-600 font-semibold hover:text-green-700 text-sm transition-colors"
+								className="inline-flex items-center mt-0 gap-2 text-green-600 font-semibold hover:text-green-700 text-sm transition-colors"
 							>
 								Read Article
 								<ArrowRight size={16} />

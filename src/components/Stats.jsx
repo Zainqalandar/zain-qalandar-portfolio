@@ -56,7 +56,7 @@ export default function Stats() {
 		{
 			icon: Trophy,
 			label: 'Years Experience',
-			value: '1',
+			value: '3',
 			suffix: '+',
 			color: 'from-orange-500 to-red-500',
 		},

@@ -1,7 +1,7 @@
 'use client'
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Mail, MapPin, Phone, Send, Github, Linkedin, Twitter, ArrowRight } from 'lucide-react'
+import { Mail, MapPin, Phone, Send, Github, Linkedin, Twitter, CheckCircle2, AlertCircle } from 'lucide-react'
 
 export default function Contact() {
   const [name, setName] = useState('')
@@ -9,10 +9,27 @@ export default function Contact() {
   const [subject, setSubject] = useState('')
   const [msg, setMsg] = useState('')
   const [sent, setSent] = useState(false)
+  const [error, setError] = useState('')
   const [hoveredField, setHoveredField] = useState(null)
+
+  const validateEmail = (email) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    setError('')
+
+    if (!name.trim() || !email.trim() || !subject.trim() || !msg.trim()) {
+      setError('Please fill in all fields')
+      return
+    }
+
+    if (!validateEmail(email)) {
+      setError('Please enter a valid email address')
+      return
+    }
+
     const body = encodeURIComponent(
       `Name: ${name}\nEmail: ${email}\nSubject: ${subject}\n\nMessage:\n${msg}`
     )
@@ -20,7 +37,11 @@ export default function Contact() {
       subject || 'Portfolio Contact'
     )}&body=${body}`
     setSent(true)
-    setTimeout(() => setSent(false), 3000)
+    setName('')
+    setEmail('')
+    setSubject('')
+    setMsg('')
+    setTimeout(() => setSent(false), 4000)
   }
 
   const containerVariants = {
@@ -179,18 +200,20 @@ export default function Contact() {
                   onHoverEnd={() => setHoveredField(null)}
                   className="relative"
                 >
-                  <label className="block text-sm font-poppins font-semibold text-white mb-2">Name</label>
+                  <label className="block text-sm font-poppins font-semibold text-white mb-2">
+                    Full Name <span className="text-red-400">*</span>
+                  </label>
                   <motion.input
                     required
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    placeholder="Your name"
-                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-green-500/50 focus:bg-white/10 transition-all duration-300 font-inter"
-                    whileFocus={{ scale: 1.02 }}
+                    placeholder="John Doe"
+                    className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/20 text-white placeholder:text-gray-400 focus:outline-none focus:border-green-500 focus:bg-white/10 focus:ring-1 focus:ring-green-500/30 transition-all duration-300 font-inter text-base"
+                    whileFocus={{ scale: 1.01 }}
                   />
                   {(hoveredField === 'name' || name) && (
                     <motion.div
-                      className="absolute inset-0 rounded-xl bg-gradient-to-r from-green-500/10 to-emerald-500/10 -z-10"
+                      className="absolute inset-0 rounded-lg bg-gradient-to-r from-green-500/5 to-emerald-500/5 -z-10"
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                     />
@@ -204,19 +227,21 @@ export default function Contact() {
                   onHoverEnd={() => setHoveredField(null)}
                   className="relative"
                 >
-                  <label className="block text-sm font-poppins font-semibold text-white mb-2">Email</label>
+                  <label className="block text-sm font-poppins font-semibold text-white mb-2">
+                    Email Address <span className="text-red-400">*</span>
+                  </label>
                   <motion.input
                     required
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder="your@email.com"
-                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-green-500/50 focus:bg-white/10 transition-all duration-300 font-inter"
-                    whileFocus={{ scale: 1.02 }}
+                    placeholder="john@example.com"
+                    className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/20 text-white placeholder:text-gray-400 focus:outline-none focus:border-green-500 focus:bg-white/10 focus:ring-1 focus:ring-green-500/30 transition-all duration-300 font-inter text-base"
+                    whileFocus={{ scale: 1.01 }}
                   />
                   {(hoveredField === 'email' || email) && (
                     <motion.div
-                      className="absolute inset-0 rounded-xl bg-gradient-to-r from-green-500/10 to-emerald-500/10 -z-10"
+                      className="absolute inset-0 rounded-lg bg-gradient-to-r from-green-500/5 to-emerald-500/5 -z-10"
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                     />
@@ -231,18 +256,20 @@ export default function Contact() {
                 onHoverEnd={() => setHoveredField(null)}
                 className="relative"
               >
-                <label className="block text-sm font-poppins font-semibold text-white mb-2">Subject</label>
+                <label className="block text-sm font-poppins font-semibold text-white mb-2">
+                  Subject <span className="text-red-400">*</span>
+                </label>
                 <motion.input
                   required
                   value={subject}
                   onChange={(e) => setSubject(e.target.value)}
-                  placeholder="Project inquiry"
-                  className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-green-500/50 focus:bg-white/10 transition-all duration-300 font-inter"
-                  whileFocus={{ scale: 1.02 }}
+                  placeholder="What is this about?"
+                  className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/20 text-white placeholder:text-gray-400 focus:outline-none focus:border-green-500 focus:bg-white/10 focus:ring-1 focus:ring-green-500/30 transition-all duration-300 font-inter text-base"
+                  whileFocus={{ scale: 1.01 }}
                 />
                 {(hoveredField === 'subject' || subject) && (
                   <motion.div
-                    className="absolute inset-0 rounded-xl bg-gradient-to-r from-green-500/10 to-emerald-500/10 -z-10"
+                    className="absolute inset-0 rounded-lg bg-gradient-to-r from-green-500/5 to-emerald-500/5 -z-10"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                   />
@@ -256,31 +283,45 @@ export default function Contact() {
                 onHoverEnd={() => setHoveredField(null)}
                 className="relative"
               >
-                <label className="block text-sm font-poppins font-semibold text-white mb-2">Message</label>
+                <label className="block text-sm font-poppins font-semibold text-white mb-2">
+                  Message <span className="text-red-400">*</span>
+                </label>
                 <motion.textarea
                   required
                   value={msg}
                   onChange={(e) => setMsg(e.target.value)}
-                  placeholder="Tell me about your project..."
+                  placeholder="Tell me more about your project or inquiry..."
                   rows={6}
-                  className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-green-500/50 focus:bg-white/10 transition-all duration-300 resize-none font-inter"
-                  whileFocus={{ scale: 1.02 }}
+                  className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/20 text-white placeholder:text-gray-400 focus:outline-none focus:border-green-500 focus:bg-white/10 focus:ring-1 focus:ring-green-500/30 transition-all duration-300 resize-none font-inter text-base"
+                  whileFocus={{ scale: 1.01 }}
                 />
                 {(hoveredField === 'message' || msg) && (
                   <motion.div
-                    className="absolute inset-0 rounded-xl bg-gradient-to-r from-green-500/10 to-emerald-500/10 -z-10"
+                    className="absolute inset-0 rounded-lg bg-gradient-to-r from-green-500/5 to-emerald-500/5 -z-10"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                   />
                 )}
               </motion.div>
 
+              {/* Error Message */}
+              {error && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  className="p-4 rounded-lg bg-red-500/20 border border-red-500/50 text-red-300 text-center font-semibold flex items-center justify-center gap-2"
+                >
+                  <AlertCircle size={18} />
+                  {error}
+                </motion.div>
+              )}
+
               {/* Submit Button */}
               <motion.button
                 type="submit"
-                whileHover={{ scale: 1.05, boxShadow: '0 20px 40px rgba(34, 197, 94, 0.3)' }}
-                whileTap={{ scale: 0.95 }}
-                className="w-full px-6 py-4 rounded-xl bg-gradient-to-r from-green-500 to-emerald-500 text-white font-poppins font-bold text-lg flex items-center justify-center gap-2 hover:shadow-lg transition-all duration-300"
+                whileHover={{ scale: 1.02, boxShadow: '0 20px 40px rgba(34, 197, 94, 0.4)' }}
+                whileTap={{ scale: 0.98 }}
+                className="w-full px-6 py-4 rounded-lg bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white font-poppins font-bold text-lg flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transition-all duration-300"
               >
                 <Send size={20} />
                 Send Message
@@ -292,9 +333,10 @@ export default function Contact() {
                 initial={{ opacity: 0, y: 10, scale: 0.95 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: -10, scale: 0.95 }}
-                className="mt-6 p-4 rounded-xl bg-green-500/20 border border-green-500/50 text-green-300 text-center font-semibold flex items-center justify-center gap-2"
+                className="mt-6 p-4 rounded-lg bg-green-500/20 border border-green-500/50 text-green-300 text-center font-semibold flex items-center justify-center gap-2"
               >
-                ✅ Mail client opened — complete the message to send.
+                <CheckCircle2 size={20} />
+                Message sent successfully! I'll get back to you soon.
               </motion.div>
             )}
           </div>

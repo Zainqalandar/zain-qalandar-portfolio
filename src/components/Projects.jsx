@@ -24,7 +24,7 @@ export default function Projects() {
           hidden: {},
           visible: { transition: { staggerChildren: 0.12 } }
         }}
-        className="grid gap-8 md:grid-cols-2"
+        className="grid gap-8 md:grid-cols-2 mt-8"
       >
         {projects.map((p, idx) => (
           <motion.article
