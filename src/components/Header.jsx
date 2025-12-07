@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import Link from 'next/link';
 import Image from 'next/image';
 import { Menu, X, Zap } from 'lucide-react';
@@ -72,11 +72,7 @@ export default function Header() {
 			initial={{ opacity: 0, y: -20 }}
 			animate={{ opacity: 1, y: 0 }}
 			transition={{ duration: 0.6, type: 'spring', stiffness: 100 }}
-			className={`relative w-full sticky top-0 z-50 transition-all duration-300 ${
-				scrolled
-					? 'glass-effect border-white/20 shadow-xl'
-					: 'bg-gradient-to-r from-slate-900/80 via-slate-900/70 to-slate-900/80 border-b border-white/10'
-			}`}
+			className={`site-header relative w-full sticky top-0 z-50 transition-all duration-300 ${scrolled ? 'glass-effect shadow-xl' : ''}`}
 		>
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
 				{/* Logo */}
@@ -164,6 +160,8 @@ export default function Header() {
 					</motion.a>
 				</motion.nav>
 
+					{/* Theme switcher removed from header - global floating widget used instead */}
+
 				{/* Mobile Menu Button (visible up to lg) */}
 				<motion.button
 					className="lg:hidden p-2 rounded-lg hover:bg-white/10 transition text-white"
@@ -194,7 +192,7 @@ export default function Header() {
 							animate={{ opacity: 1, y: 0 }}
 							exit={{ opacity: 0, y: -10 }}
 							transition={{ duration: 0.25 }}
-							className="lg:hidden fixed inset-x-0 top-16 bottom-0 z-[9999] border-t border-white/10 bg-slate-900/95 backdrop-blur-xl overflow-auto"
+								className="lg:hidden fixed inset-x-0 top-16 bottom-0 z-[9999] nav-overlay overflow-auto"
 						>
 							<motion.div
 								className="px-6 py-6 flex flex-col gap-3 relative max-w-3xl mx-auto"
@@ -210,6 +208,8 @@ export default function Header() {
 								>
 									<X size={20} />
 								</button>
+
+								{/* Mobile theme picker removed from header - global floating widget used instead */}
 
 								{navLinks.map((link) => {
 									const active = isLinkActive(link.href);

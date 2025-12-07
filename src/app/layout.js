@@ -1,6 +1,8 @@
 import { Metadata } from 'next';
 import { Poppins, Inter } from 'next/font/google';
 import './globals.css';
+import ThemeProvider from '@/components/ThemeProvider';
+import ThemeWidget from '@/components/ThemeWidget';
 
 const poppins = Poppins({
 	variable: '--font-poppins',
@@ -36,7 +38,12 @@ export default function RootLayout({ children }) {
 				<meta name="theme-color" content="#10b981" />
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 			</head>
-			<body>{children}</body>
+			<body>
+				<ThemeProvider>
+					<ThemeWidget />
+					{children}
+				</ThemeProvider>
+			</body>
 		</html>
 	);
 }
