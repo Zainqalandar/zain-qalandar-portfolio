@@ -91,7 +91,7 @@ export default function Header() {
 
 				{/* Desktop Navigation */}
 				<motion.nav
-					className="hidden md:flex gap-1 items-center"
+					className="hidden lg:flex gap-1 items-center"
 					variants={containerVariants}
 					initial="hidden"
 					animate="visible"
@@ -129,11 +129,13 @@ export default function Header() {
 					</motion.a>
 				</motion.nav>
 
-				{/* Mobile Menu Button */}
+				{/* Mobile Menu Button (visible up to lg) */}
 				<motion.button
-					className="md:hidden p-2 rounded-lg hover:bg-white/10 transition text-white"
+					className="lg:hidden p-2 rounded-lg hover:bg-white/10 transition text-white"
 					onClick={() => setOpen(!open)}
 					aria-label="menu"
+					aria-controls="mobile-nav"
+					aria-expanded={open}
 					whileHover={{ scale: 1.1 }}
 					whileTap={{ scale: 0.95 }}
 				>
@@ -146,47 +148,59 @@ export default function Header() {
 				</motion.button>
 			</div>
 
-			{/* Mobile Navigation */}
-			<AnimatePresence>
-				{open && (
-					<motion.div
-						initial={{ opacity: 0, y: -20, height: 0 }}
-						animate={{ opacity: 1, y: 0, height: 'auto' }}
-						exit={{ opacity: 0, y: -20, height: 0 }}
-						transition={{ duration: 0.3 }}
-						className="md:hidden fixed inset-x-0 top-16 z-[9999] border-t border-white/10 bg-slate-900/95 backdrop-blur-xl overflow-hidden"
-					>
+				{/* Mobile Navigation */}
+				<AnimatePresence>
+					{open && (
 						<motion.div
-							className="px-6 py-6 flex flex-col gap-3"
-							variants={containerVariants}
-							initial="hidden"
-							animate="visible"
+							id="mobile-nav"
+							role="dialog"
+							aria-modal="true"
+							initial={{ opacity: 0, y: -10 }}
+							animate={{ opacity: 1, y: 0 }}
+							exit={{ opacity: 0, y: -10 }}
+							transition={{ duration: 0.25 }}
+							className="lg:hidden fixed inset-x-0 top-16 bottom-0 z-[9999] border-t border-white/10 bg-slate-900/95 backdrop-blur-xl overflow-auto"
 						>
-							{navLinks.map((link) => (
-								<motion.a
-									key={link.name}
-									href={link.href}
-									variants={itemVariants}
-									className="text-gray-300 hover:text-green-400 font-inter font-medium transition-colors px-4 py-2 rounded-lg hover:bg-white/5 text-center"
+							<motion.div
+								className="px-6 py-6 flex flex-col gap-3 relative max-w-3xl mx-auto"
+								variants={containerVariants}
+								initial="hidden"
+								animate="visible"
+							>
+								{/* Close button inside overlay for easier access on tablets */}
+								<button
+									aria-label="Close menu"
+									className="absolute right-4 top-4 p-2 rounded-md text-white hover:bg-white/5"
 									onClick={() => setOpen(false)}
 								>
-									{link.name}
+									<X size={20} />
+								</button>
+
+								{navLinks.map((link) => (
+									<motion.a
+										key={link.name}
+										href={link.href}
+										variants={itemVariants}
+										className="text-gray-300 hover:text-green-400 font-inter font-medium transition-colors px-4 py-3 rounded-lg hover:bg-white/5 text-center"
+										onClick={() => setOpen(false)}
+									>
+										{link.name}
+									</motion.a>
+								))}
+								<motion.a
+									variants={itemVariants}
+									href="/resume.pdf"
+									whileHover={{ scale: 1.02 }}
+									whileTap={{ scale: 0.98 }}
+									className="mt-2 px-4 py-3 rounded-xl bg-gradient-to-r from-green-500 to-emerald-500 text-white font-poppins font-semibold shadow-lg text-center transition-all duration-300"
+									onClick={() => setOpen(false)}
+								>
+									Resume
 								</motion.a>
-							))}
-							<motion.a
-								variants={itemVariants}
-								href="/resume.pdf"
-								whileHover={{ scale: 1.02 }}
-								whileTap={{ scale: 0.98 }}
-								className="px-4 py-3 rounded-xl bg-gradient-to-r from-green-500 to-emerald-500 text-white font-poppins font-semibold shadow-lg text-center transition-all duration-300"
-								onClick={() => setOpen(false)}
-							>
-								Resume
-							</motion.a>
+							</motion.div>
 						</motion.div>
-					</motion.div>
-				)}
-			</AnimatePresence>
+					)}
+				</AnimatePresence>
 		</motion.header>
 	);
 }

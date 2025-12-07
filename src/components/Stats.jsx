@@ -95,7 +95,7 @@ export default function Stats() {
 	};
 
 	return (
-		<section className="mt-24 py-16 relative z-10">
+		<section className="mt-24 py-8 relative z-10">
 			<motion.div
 				initial="hidden"
 				whileInView="visible"
