@@ -12,10 +12,16 @@ import Testimonials from '@/components/Testimonials';
 import CTA from '@/components/CTA';
 import FAQ from '@/components/FAQ';
 import Articles from '@/components/Articles';
+import ScrollToTopButton from '@/components/ScrollToTopButton';
+import ScrollProgressBar from '@/components/ScrollProgressBar';
+import ActiveSectionHighlight from '@/components/ActiveSectionHighlight';
 
 export default function Home() {
 	return (
 		<>
+			<ScrollProgressBar />
+			<ActiveSectionHighlight />
+			<ScrollToTopButton />
 			<div className="min-h-screen flex flex-col">
 				<Header />
 				<main className="max-w-6xl mx-auto px-3 py-0 w-full">

@@ -9,10 +9,27 @@ import navLinks from '@/data/navLinks.json';
 export default function Header() {
 	const [open, setOpen] = useState(false);
 	const [scrolled, setScrolled] = useState(false);
+	const [activeSection, setActiveSection] = useState('hero');
 
 	useEffect(() => {
 		const handleScroll = () => {
 			setScrolled(window.scrollY > 50);
+
+			// Update active section
+			const sections = ['hero', 'about', 'services', 'experience', 'skills', 'projects', 'testimonials', 'faq', 'contact'];
+			let current = 'hero';
+
+			for (const section of sections) {
+				const element = document.getElementById(section);
+				if (element) {
+					const rect = element.getBoundingClientRect();
+					if (rect.top <= window.innerHeight / 3) {
+						current = section;
+					}
+				}
+			}
+
+			setActiveSection(current);
 		};
 		window.addEventListener('scroll', handleScroll);
 		return () => window.removeEventListener('scroll', handleScroll);
@@ -43,6 +60,11 @@ export default function Header() {
 			y: 0,
 			transition: { type: 'spring', stiffness: 100, damping: 15 },
 		},
+	};
+
+	const isLinkActive = (href) => {
+		const sectionId = href.replace('#', '');
+		return activeSection === sectionId;
 	};
 
 	return (
@@ -96,24 +118,37 @@ export default function Header() {
 					initial="hidden"
 					animate="visible"
 				>
-					{navLinks.map((link) => (
-						<motion.a
-							key={link.name}
-							href={link.href}
-							variants={itemVariants}
-							className="relative group px-4 py-2 text-sm font-inter font-medium text-gray-300 hover:text-white transition-colors"
-							onClick={() => setOpen(false)}
-						>
-							{link.name}
-							<motion.span
-								layoutId="underline"
-								className="absolute left-0 -bottom-1 h-[2px] bg-gradient-to-r from-green-400 to-emerald-400 transition-all"
-								initial={{ width: 0 }}
-								whileHover={{ width: '100%' }}
-								transition={{ duration: 0.3 }}
-							/>
-						</motion.a>
-					))}
+					{navLinks.map((link) => {
+						const active = isLinkActive(link.href);
+						return (
+							<motion.a
+								key={link.name}
+								href={link.href}
+								variants={itemVariants}
+								className={`relative group px-4 py-2 text-sm font-inter font-medium transition-colors ${
+									active ? 'text-green-400' : 'text-gray-300 hover:text-white'
+								}`}
+								onClick={() => setOpen(false)}
+							>
+								{link.name}
+								<motion.span
+									layoutId="underline"
+									className="absolute left-0 -bottom-1 h-[2px] bg-gradient-to-r from-green-400 to-emerald-400"
+									initial={{ width: 0 }}
+									animate={{ width: active ? '100%' : 0 }}
+									whileHover={{ width: '100%' }}
+									transition={{ duration: 0.3 }}
+								/>
+								{active && (
+									<motion.div
+										layoutId="activeIndicator"
+										className="absolute inset-0 rounded-lg bg-green-500/10 -z-10"
+										transition={{ duration: 0.3 }}
+									/>
+								)}
+							</motion.a>
+						);
+					})}
 
 					<motion.a
 						variants={itemVariants}
@@ -176,17 +211,24 @@ export default function Header() {
 									<X size={20} />
 								</button>
 
-								{navLinks.map((link) => (
-									<motion.a
-										key={link.name}
-										href={link.href}
-										variants={itemVariants}
-										className="text-gray-300 hover:text-green-400 font-inter font-medium transition-colors px-4 py-3 rounded-lg hover:bg-white/5 text-center"
-										onClick={() => setOpen(false)}
-									>
-										{link.name}
-									</motion.a>
-								))}
+								{navLinks.map((link) => {
+									const active = isLinkActive(link.href);
+									return (
+										<motion.a
+											key={link.name}
+											href={link.href}
+											variants={itemVariants}
+											className={`font-inter font-medium transition-colors px-4 py-3 rounded-lg text-center ${
+												active
+													? 'bg-green-500/20 text-green-400 border border-green-500/30'
+													: 'text-gray-300 hover:text-green-400 hover:bg-white/5'
+											}`}
+											onClick={() => setOpen(false)}
+										>
+											{link.name}
+										</motion.a>
+									);
+								})}
 								<motion.a
 									variants={itemVariants}
 									href="/resume.pdf"
