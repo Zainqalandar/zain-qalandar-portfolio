@@ -53,7 +53,7 @@ export default function Hero() {
 									whileHover={{ scale: 1.04 }}
 								>
 									Syed Zain
-								</motion.span>.
+								</motion.span>
 							</motion.h1>
 							<motion.p variants={itemVariants} className="text-gray-300 max-w-lg mt-2 font-inter">
 								I'm a Front-end focused Full-Stack (MERN) developer building accessible, performant interfaces and solid backends.
@@ -92,7 +92,7 @@ export default function Hero() {
 									<a href="https://github.com/Zainqalandar" target="_blank" rel="noreferrer" className="w-10 h-10 flex items-center justify-center rounded-full bg-slate-900/30 border border-green-500/20 text-green-300 hover:bg-green-600/10 transition">
 										<Github size={16} />
 									</a>
-									<a href="https://www.linkedin.com/in/zainqalandar" target="_blank" rel="noreferrer" className="w-10 h-10 flex items-center justify-center rounded-full bg-slate-900/30 border border-blue-500/10 text-blue-300 hover:bg-blue-600/10 transition">
+									<a href="https://www.linkedin.com/in/zainqalandar-online" target="_blank" rel="noreferrer" className="w-10 h-10 flex items-center justify-center rounded-full bg-slate-900/30 border border-blue-500/10 text-blue-300 hover:bg-blue-600/10 transition">
 										<Linkedin size={16} />
 									</a>
 									<a href="mailto:bsitf21e68406@gcbskp.edu.pk" className="w-10 h-10 flex items-center justify-center rounded-full bg-slate-900/30 border border-emerald-500/10 text-emerald-300 hover:bg-emerald-600/10 transition">

@@ -1,12 +1,10 @@
 "use client";
 import React, { useState, useRef, useEffect } from 'react';
 import { Sun, Moon, SunDim, Sparkles } from 'lucide-react';
-import { useTheme } from './ThemeProvider';
+import { useTheme } from '@/components/layout/ThemeProvider';
 
 const THEME_META = [
   { id: 'dark', title: 'Dark', icon: Moon, colors: ['#0f172a', '#064e3b', '#0d3d2c'] },
-//   { id: 'light', title: 'Light', icon: Sun, colors: ['#f8fafc', '#eef2ff', '#f0f9ff'] },
-//   { id: 'solar', title: 'Solar', icon: SunDim, colors: ['#fff7ed', '#ffedd5', '#fff1e0'] },
   { id: 'midnight', title: 'Midnight', icon: Sparkles, colors: ['#0b1020', '#071229', '#00121a'] },
 ];
 

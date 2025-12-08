@@ -27,9 +27,6 @@ export default function ScrollProgressBar() {
 			initial={{ scaleX: 0 }}
 			animate={{ scaleX: scrollProgress / 100 }}
 			transition={{ type: 'spring', stiffness: 100, damping: 30, mass: 1 }}
-		>
-			{/* Glow effect */}
-			<div className="absolute inset-0 blur-md opacity-50 bg-gradient-to-r from-green-400 via-emerald-400 to-teal-400" />
-		</motion.div>
+		/>
 	);
 }

@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from 'react';
-import { useTheme } from './ThemeProvider';
+import { useTheme } from '@/components/layout/ThemeProvider';
 
 const THEME_META = [
   { id: 'dark', title: 'Dark', hint: 'Default' },

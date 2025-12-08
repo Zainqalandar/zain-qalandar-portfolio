@@ -1,20 +1,22 @@
-import About from '@/components/About';
-import Contact from '@/components/Contact';
-import Footer from '@/components/Footer';
-import Header from '@/components/Header';
-import Hero from '@/components/Hero';
-import Projects from '@/components/Projects';
-import Skills from '@/components/Skills';
-import Experience from '@/components/Experience';
-import Services from '@/components/Services';
-import Stats from '@/components/Stats';
-import Testimonials from '@/components/Testimonials';
-import CTA from '@/components/CTA';
-import FAQ from '@/components/FAQ';
-import Articles from '@/components/Articles';
-import ScrollToTopButton from '@/components/ScrollToTopButton';
-import ScrollProgressBar from '@/components/ScrollProgressBar';
-import ActiveSectionHighlight from '@/components/ActiveSectionHighlight';
+import {
+	Hero,
+	About,
+	Services,
+	Experience,
+	Stats,
+	Skills,
+	Projects,
+	Testimonials,
+	Articles,
+	FAQ,
+	CTA,
+	Contact,
+	Header,
+	Footer,
+	ScrollToTopButton,
+	ScrollProgressBar,
+	ActiveSectionHighlight,
+} from '@/components';
 
 export default function Home() {
 	return (
