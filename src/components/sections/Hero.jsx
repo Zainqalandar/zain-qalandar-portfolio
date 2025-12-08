@@ -60,7 +60,7 @@ export default function Hero() {
 							</motion.p>
 
 							<motion.div variants={itemVariants} className="flex flex-wrap gap-4 mt-6">
-								<a href="/resume.pdf" className="btn-primary px-5 py-3 rounded-full font-poppins font-semibold flex items-center gap-3 bg-green-500 hover:bg-emerald-500 transition-colors text-white">
+								<a href="/cv/ZainQalandar-FullStack(Mern)-CV-1.pdf" download="ZainQalandar-CV.pdf" className="btn-primary px-5 py-3 rounded-full font-poppins font-semibold flex items-center gap-3 bg-green-500 hover:bg-emerald-500 transition-colors text-white" aria-label="Download CV">
 									Download CV
 								</a>
 								<a href="#projects" className="flex items-center gap-3 border border-green-500/30 text-green-200 px-5 py-3 rounded-full font-poppins hover:bg-green-600/10 transition">

@@ -148,7 +148,10 @@ export default function Header() {
 
 					<motion.a
 						variants={itemVariants}
-						href="/resume.pdf"
+						href="/cv/ZainQalandar-FullStack(Mern)-CV-1.pdf"
+						target="_blank"
+						rel="noopener noreferrer"
+						aria-label="Open resume in a new tab"
 						whileHover={{ scale: 1.05, boxShadow: '0 10px 30px rgba(34, 197, 94, 0.3)' }}
 						whileTap={{ scale: 0.95 }}
 						className="ml-6 px-6 py-2 rounded-xl bg-gradient-to-r from-green-500 to-emerald-500 text-white font-poppins font-semibold shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2"
@@ -231,7 +234,10 @@ export default function Header() {
 								})}
 								<motion.a
 									variants={itemVariants}
-									href="/resume.pdf"
+									href="/cv/ZainQalandar-FullStack(Mern)-CV-1.pdf"
+									target="_blank"
+									rel="noopener noreferrer"
+									aria-label="Open resume in a new tab"
 									whileHover={{ scale: 1.02 }}
 									whileTap={{ scale: 0.98 }}
 									className="mt-2 px-4 py-3 rounded-xl bg-gradient-to-r from-green-500 to-emerald-500 text-white font-poppins font-semibold shadow-lg text-center transition-all duration-300"
