@@ -1,34 +1,12 @@
 'use client';
 import { motion } from 'framer-motion';
 import { Star } from 'lucide-react';
+import { profile } from '@/data/profile';
 
 export default function Testimonials() {
-	const testimonials = [
-		{
-			name: 'Ahmed Hassan',
-			role: 'Project Manager',
-			company: 'KodeStudio',
-			message:
-				'Zain is an excellent developer with strong attention to detail. He consistently delivers high-quality code and is a pleasure to work with. His ability to convert designs into responsive interfaces is remarkable.',
-			rating: 5,
-		},
-		{
-			name: 'Fatima Khan',
-			role: 'UI/UX Designer',
-			company: 'Tech Innovations',
-			message:
-				'Working with Zain was amazing. He understood the design vision perfectly and implemented it flawlessly. Very professional and communicative throughout the project.',
-			rating: 5,
-		},
-		{
-			name: 'Mustafa Ali',
-			role: 'CTO',
-			company: 'StartUp Pro',
-			message:
-				'Zain demonstrates strong technical skills and problem-solving abilities. His experience with MERN stack is evident, and he brings fresh perspectives to development challenges.',
-			rating: 5,
-		},
-	];
+	const { testimonials, testimonialsSection } = profile;
+
+	if (!testimonials || testimonials.length === 0) return null;
 
 	return (
 		<section id="testimonials" className="mt-20">
@@ -40,7 +18,7 @@ export default function Testimonials() {
 				style={{ marginBottom: 32 }}
 				className="section-title mb-12"
 			>
-				What People Say
+				{testimonialsSection?.title}
 			</motion.h2>
 
 			<motion.div
@@ -65,7 +43,7 @@ export default function Testimonials() {
 						className="glass-effect rounded-2xl p-6 md:p-8 card-hover"
 					>
 						<div className="flex gap-1 mb-4">
-							{[...Array(testimonial.rating)].map((_, i) => (
+							{[...Array(testimonial.rating ?? 5)].map((_, i) => (
 								<Star
 									key={i}
 									size={16}
@@ -75,7 +53,7 @@ export default function Testimonials() {
 						</div>
 
 						<p className="text-gray-700 mb-6 leading-relaxed italic">
-							"{testimonial.message}"
+							"{testimonial.quote}"
 						</p>
 
 						<div className="flex items-center gap-3 pt-4 border-t border-white/20">
@@ -84,9 +62,15 @@ export default function Testimonials() {
 								<p className="font-semibold text-gray-900">
 									{testimonial.name}
 								</p>
-								<p className="text-xs text-gray-600">
-									{testimonial.role} at {testimonial.company}
-								</p>
+								{(testimonial.role || testimonial.company) && (
+									<p className="text-xs text-gray-600">
+										{testimonial.role}
+										{testimonial.role && testimonial.company
+											? ` ${testimonialsSection?.roleConnector ?? 'at'} `
+											: ''}
+										{testimonial.company}
+									</p>
+								)}
 							</div>
 						</div>
 					</motion.div>

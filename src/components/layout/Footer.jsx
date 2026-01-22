@@ -1,8 +1,13 @@
 'use client'
-import { Github, Instagram, Mail, Heart, ArrowUp } from 'lucide-react'
+import { Heart, ArrowUp } from 'lucide-react'
 import { motion } from 'framer-motion'
+import { profile } from '@/data/profile'
 
 export default function Footer() {
+  const { footer } = profile
+  const year = new Date().getFullYear()
+  const copyright = footer.copyrightTemplate.replace('{year}', `${year}`)
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
@@ -53,10 +58,10 @@ export default function Footer() {
             {/* Brand Section */}
             <motion.div variants={itemVariants} className="flex flex-col items-center md:items-start">
               <h3 className="text-2xl font-poppins font-bold bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent mb-2">
-                Syed Zain Qalandar
+                {footer.brandName}
               </h3>
               <p className="text-gray-300 text-sm font-inter">
-                Full Stack Developer & Creative Builder
+                {footer.tagline}
               </p>
               <motion.div
                 animate={{ y: [0, -5, 0] }}
@@ -69,61 +74,49 @@ export default function Footer() {
 
             {/* Quick Links */}
             <motion.div variants={itemVariants} className="flex flex-col items-center">
-              <h4 className="text-white font-poppins font-semibold mb-4">Quick Links</h4>
+              <h4 className="text-white font-poppins font-semibold mb-4">{footer.quickLinksTitle}</h4>
               <div className="space-y-2 text-center">
-                <a href="#about" className="block text-gray-300 hover:text-green-400 transition-colors text-sm font-inter">
-                  About
-                </a>
-                <a href="#projects" className="block text-gray-300 hover:text-green-400 transition-colors text-sm font-inter">
-                  Projects
-                </a>
-                <a href="#contact" className="block text-gray-300 hover:text-green-400 transition-colors text-sm font-inter">
-                  Contact
-                </a>
+                {footer.quickLinks.map((link) => (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    className="block text-gray-300 hover:text-green-400 transition-colors text-sm font-inter"
+                  >
+                    {link.label}
+                  </a>
+                ))}
               </div>
             </motion.div>
 
             {/* Social Links */}
             <motion.div variants={itemVariants} className="flex flex-col items-center md:items-end">
-              <h4 className="text-white font-poppins font-semibold mb-4">Follow</h4>
+              <h4 className="text-white font-poppins font-semibold mb-4">{footer.socialTitle}</h4>
               <motion.div
                 className="flex gap-4"
                 variants={containerVariants}
                 initial="hidden"
                 animate="visible"
               >
-                <motion.a
-                  variants={itemVariants}
-                  href="mailto:bsitf21e68406@gcbskp.edu.pk"
-                  whileHover={{ scale: 1.1, rotate: 10 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="p-3 rounded-lg border border-white/20 text-gray-400 hover:text-green-400 hover:border-green-500/50 transition-all duration-300"
-                  title="Email"
-                >
-                  <Mail size={18} />
-                </motion.a>
-                <motion.a
-                  variants={itemVariants}
-                  href="https://instagram.com/zainqalandar.brand"
-                  target="_blank"
-                  whileHover={{ scale: 1.1, rotate: 10 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="p-3 rounded-lg border border-white/20 text-gray-400 hover:text-pink-400 hover:border-pink-500/50 transition-all duration-300"
-                  title="Instagram"
-                >
-                  <Instagram size={18} />
-                </motion.a>
-                <motion.a
-                  variants={itemVariants}
-                  href="https://github.com/Zainqalandar"
-                  target="_blank"
-                  whileHover={{ scale: 1.1, rotate: 10 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="p-3 rounded-lg border border-white/20 text-gray-400 hover:text-white hover:border-white/50 transition-all duration-300"
-                  title="GitHub"
-                >
-                  <Github size={18} />
-                </motion.a>
+                {footer.socialLinks.map((social) => {
+                  const Icon = social.icon
+                  const isExternal = social.href.startsWith('http')
+                  return (
+                    <motion.a
+                      key={social.label}
+                      variants={itemVariants}
+                      href={social.href}
+                      target={isExternal ? '_blank' : undefined}
+                      rel={isExternal ? 'noreferrer' : undefined}
+                      whileHover={{ scale: 1.1, rotate: 10 }}
+                      whileTap={{ scale: 0.95 }}
+                      className={social.className}
+                      title={social.label}
+                      aria-label={social.label}
+                    >
+                      <Icon size={18} />
+                    </motion.a>
+                  )
+                })}
               </motion.div>
             </motion.div>
           </div>
@@ -139,7 +132,7 @@ export default function Footer() {
               transition={{ delay: 0.5 }}
               className="text-sm text-gray-300 font-inter"
             >
-              © {new Date().getFullYear()} Syed Zain Qalandar. All rights reserved.
+              {copyright}
             </motion.div>
 
             <motion.div
@@ -147,9 +140,9 @@ export default function Footer() {
               animate={{ opacity: [0.5, 1, 0.5] }}
               transition={{ duration: 3, repeat: Infinity }}
             >
-              <span>Made with</span>
+              <span>{footer.madeWithPrefix}</span>
               <Heart size={14} className="text-green-400" fill="currentColor" />
-              <span>using Next.js & Framer Motion</span>
+              <span>{footer.madeWithSuffix}</span>
             </motion.div>
 
             {/* Scroll to Top */}
@@ -158,7 +151,8 @@ export default function Footer() {
               whileHover={{ scale: 1.1, y: -5 }}
               whileTap={{ scale: 0.95 }}
               className="p-3 rounded-lg border border-white/20 text-gray-300 hover:text-green-400 hover:border-green-500/50 transition-all duration-300"
-              title="Back to top"
+              title={footer.backToTopLabel}
+              aria-label={footer.backToTopLabel}
             >
               <ArrowUp size={18} />
             </motion.button>

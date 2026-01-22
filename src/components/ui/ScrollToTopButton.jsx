@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowUp } from 'lucide-react';
+import { profile } from '@/data/profile';
 
 export default function ScrollToTopButton() {
 	const [isVisible, setIsVisible] = useState(false);
@@ -44,7 +45,7 @@ export default function ScrollToTopButton() {
 					whileTap={{ scale: 0.95 }}
 					onClick={scrollToTop}
 					className="fixed bottom-8 right-8 z-40 w-12 h-12 rounded-full bg-gradient-to-br from-green-500 to-emerald-600 text-white shadow-xl border border-green-400/30 flex items-center justify-center group overflow-hidden"
-					aria-label="Scroll to top"
+					aria-label={profile.ui.scrollToTopLabel}
 				>
 					{/* Circular progress background */}
 					<svg

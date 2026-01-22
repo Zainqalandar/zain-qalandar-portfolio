@@ -2,42 +2,14 @@
 import { motion } from 'framer-motion';
 import { ChevronDown, HelpCircle } from 'lucide-react';
 import { useState } from 'react';
+import { profile } from '@/data/profile';
 
 export default function FAQ() {
 	const [activeIdx, setActiveIdx] = useState(null);
 
-	const faqs = [
-		{
-			question: 'What is your typical project timeline?',
-			answer:
-				'Project timelines vary depending on complexity and scope. A simple landing page might take 1-2 weeks, while a full-featured web application can take 2-3 months. I provide realistic estimates after understanding your requirements.',
-		},
-		{
-			question: 'Do you offer maintenance and support?',
-			answer:
-				'Yes! I offer post-launch support and maintenance packages. This includes bug fixes, updates, performance optimization, and feature enhancements to keep your application running smoothly.',
-		},
-		{
-			question: 'What technologies do you specialize in?',
-			answer:
-				'I specialize in the MERN stack (MongoDB, Express, React, Node.js) and modern tools like Next.js, Tailwind CSS, and Framer Motion. I\'m always learning new technologies to provide the best solutions.',
-		},
-		{
-			question: 'Can you work with existing codebases?',
-			answer:
-				'Absolutely! I can integrate with existing projects, refactor code, improve performance, or add new features to existing applications. I\'m comfortable working with legacy code and modernizing it.',
-		},
-		{
-			question: 'Do you sign NDAs?',
-			answer:
-				'Yes, I\'m happy to sign NDAs and confidentiality agreements to protect your project information and intellectual property.',
-		},
-		{
-			question: 'What\'s your communication style?',
-			answer:
-				'I believe in clear and transparent communication. I provide regular updates, welcome feedback, and am available for meetings via video call, email, or messaging platforms as needed.',
-		},
-	];
+	const { faq, faqSection } = profile;
+
+	if (!faq || faq.length === 0) return null;
 
 	return (
 		<section className="py-20 relative z-10" id="faq">
@@ -64,11 +36,11 @@ export default function FAQ() {
 							<HelpCircle className="text-green-500" size={32} />
 						</motion.div>
 						<h2 className="section-title text-4xl md:text-5xl font-bold">
-							Frequently Asked Questions
+							{faqSection?.title}
 						</h2>
 					</div>
 					<p className="text-gray-300 text-lg max-w-2xl mx-auto font-inter">
-						Find answers to common questions about my services, process, and expertise.
+						{faqSection?.intro}
 					</p>
 				</motion.div>
 
@@ -85,7 +57,7 @@ export default function FAQ() {
 					}}
 					className="space-y-4"
 				>
-					{faqs.map((faq, idx) => (
+					{faq.map((item, idx) => (
 						<motion.div
 							key={idx}
 							variants={{
@@ -127,7 +99,7 @@ export default function FAQ() {
 								<div className="relative px-6 py-5 rounded-xl border border-white/20 group-hover:border-green-500/50 transition-all duration-300 bg-white/5 group-hover:bg-white/10">
 									<div className="flex items-center justify-between">
 										<span className="text-left font-poppins font-semibold text-white text-lg group-hover:text-green-300 transition-colors duration-300">
-											{faq.question}
+											{item.question}
 										</span>
 										<motion.div
 											animate={{
@@ -167,7 +139,7 @@ export default function FAQ() {
 									className="px-6 py-5 rounded-xl bg-gradient-to-br from-green-500/10 via-emerald-500/5 to-transparent border border-green-500/30 shadow-lg"
 								>
 									<p className="text-gray-200 leading-relaxed font-inter text-base">
-										{faq.answer}
+										{item.answer}
 									</p>
 								</motion.div>
 							</motion.div>
@@ -183,16 +155,14 @@ export default function FAQ() {
 					viewport={{ once: true }}
 					className="mt-16 text-center"
 				>
-					<p className="text-gray-300 mb-4 font-inter">
-						Still have questions? Feel free to reach out!
-					</p>
+					<p className="text-gray-300 mb-4 font-inter">{faqSection?.ctaHelper}</p>
 					<motion.a
-						href="#contact"
+						href={faqSection?.ctaHref}
 						whileHover={{ scale: 1.05 }}
 						whileTap={{ scale: 0.95 }}
 						className="inline-block px-6 py-3 rounded-lg bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white font-poppins font-semibold transition-all duration-300 shadow-lg hover:shadow-xl"
 					>
-						Get In Touch
+						{faqSection?.ctaLabel}
 					</motion.a>
 				</motion.div>
 			</motion.div>

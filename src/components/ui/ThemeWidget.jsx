@@ -1,12 +1,13 @@
 "use client";
-import React, { useState, useRef, useEffect } from 'react';
-import { Sun, Moon, SunDim, Sparkles } from 'lucide-react';
+import { useState, useRef, useEffect } from 'react';
+import { Moon, Sparkles } from 'lucide-react';
 import { useTheme } from '@/components/layout/ThemeProvider';
+import { profile } from '@/data/profile';
 
-const THEME_META = [
-  { id: 'dark', title: 'Dark', icon: Moon, colors: ['#0f172a', '#064e3b', '#0d3d2c'] },
-  { id: 'midnight', title: 'Midnight', icon: Sparkles, colors: ['#0b1020', '#071229', '#00121a'] },
-];
+const THEME_META = profile.ui.themeWidget.options.map((option) => ({
+  ...option,
+  icon: option.id === 'midnight' ? Sparkles : Moon,
+}));
 
 export default function ThemeWidget() {
   const { theme, setTheme } = useTheme();
@@ -32,7 +33,7 @@ export default function ThemeWidget() {
           className={`transform origin-bottom-right transition-all duration-300 ${open ? 'scale-100 opacity-100 translate-y-0' : 'scale-95 opacity-0 pointer-events-none translate-y-2'}`}
         >
           <div className="w-56 bg-slate-900/95 backdrop-blur rounded-xl border border-white/8 p-3 shadow-lg">
-            <div className="text-xs text-gray-300 mb-2">Theme</div>
+            <div className="text-xs text-gray-300 mb-2">{profile.ui.themeWidget.label}</div>
             <div className="grid grid-cols-1 gap-2">
               {THEME_META.map((t) => {
                 const Icon = t.icon;
@@ -67,7 +68,7 @@ export default function ThemeWidget() {
 
         {/* Floating button */}
         <button
-          aria-label="Open theme switcher"
+          aria-label={profile.ui.themeWidget.toggleAriaLabel}
           aria-expanded={open}
           onClick={() => setOpen((s) => !s)}
           className="w-12 h-12 rounded-xl bg-gradient-to-br from-green-500 to-emerald-500 shadow-lg flex items-center justify-center text-white hover:scale-105 transition-transform focus:outline-none focus:ring-2 focus:ring-offset-2"

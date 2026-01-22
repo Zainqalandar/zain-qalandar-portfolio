@@ -1,13 +1,9 @@
 'use client'
 import { motion } from 'framer-motion'
-import skills from '@/data/skills.json'
+import { profile } from '@/data/profile'
 
 export default function Skills() {
-  const skillCategories = {
-    'Frontend': ['JavaScript (ES6+)', 'React.js', 'Next.js', 'Tailwind CSS', 'MUI'],
-    'Backend': ['Node.js', 'Express', 'MongoDB', 'Appwrite'],
-    'Tools & Others': ['Redux Toolkit', 'Git', 'Vercel']
-  }
+  const { skills } = profile
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -46,7 +42,7 @@ export default function Skills() {
         style={{ marginBottom: 32 }}
         className="section-title mb-12"
       >
-        Technical Skills
+        {skills.title}
       </motion.h2>
 
       <motion.div
@@ -56,9 +52,9 @@ export default function Skills() {
         variants={containerVariants}
         className="grid gap-8 md:grid-cols-3"
       >
-        {Object.entries(skillCategories).map(([category, categorySkills]) => (
+        {skills.categories.map((category) => (
           <motion.div
-            key={category}
+            key={category.title}
             variants={itemVariants}
             className="glass-effect rounded-2xl p-6 md:p-8 card-hover group relative overflow-hidden"
             whileHover={{ 
@@ -80,7 +76,7 @@ export default function Skills() {
                 whileHover={{ scale: 1.5 }}
                 transition={{ type: 'spring', stiffness: 300, damping: 30 }}
               />
-              {category}
+              {category.title}
             </motion.h3>
             <motion.div 
               className="space-y-2 relative z-10"
@@ -95,7 +91,7 @@ export default function Skills() {
               }}
               viewport={{ once: true }}
             >
-              {categorySkills.map(skill => (
+              {category.items.map(skill => (
                 <motion.div
                   key={skill}
                   variants={skillItemVariants}
@@ -112,7 +108,7 @@ export default function Skills() {
                     whileHover={{ scale: 1.2 }}
                     transition={{ type: 'spring', stiffness: 300, damping: 30 }}
                   >
-                    ✓
+                    {skills.itemPrefix}
                   </motion.span>
                   <motion.span whileHover={{ color: '#86efac' }}>
                     {skill}
@@ -139,16 +135,10 @@ export default function Skills() {
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
         >
-          Proficiency Level
+          {skills.proficiency.title}
         </motion.h3>
         <div className="space-y-6">
-          {[
-            { name: 'React & Next.js', level: 95 },
-            { name: 'Tailwind CSS', level: 95 },
-            { name: 'JavaScript/ES6+', level: 90 },
-            { name: 'Node.js & Express', level: 85 },
-            { name: 'MongoDB', level: 85 }
-          ].map((skill, idx) => (
+          {skills.proficiency.items.map((skill, idx) => (
             <motion.div 
               key={idx}
               initial={{ opacity: 0 }}

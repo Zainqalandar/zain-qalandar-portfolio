@@ -1,21 +1,22 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import { profile } from '@/data/profile';
 
 export default function ActiveSectionHighlight() {
-	const [activeSection, setActiveSection] = useState('hero');
-	const sections = ['hero', 'about', 'services', 'experience', 'skills', 'projects', 'testimonials', 'faq', 'contact'];
+	const sections = profile.sections.filter((section) => section.showInHighlight !== false);
+	const [activeSection, setActiveSection] = useState(sections[0]?.id || 'hero');
 
 	useEffect(() => {
 		const handleScroll = () => {
-			let current = 'hero';
+			let current = sections[0]?.id || 'hero';
 
 			for (const section of sections) {
-				const element = document.getElementById(section);
+				const element = document.getElementById(section.id);
 				if (element) {
 					const rect = element.getBoundingClientRect();
 					if (rect.top <= window.innerHeight / 2) {
-						current = section;
+						current = section.id;
 					}
 				}
 			}
@@ -37,8 +38,8 @@ export default function ActiveSectionHighlight() {
 		>
 			{sections.map((section) => (
 				<motion.a
-					key={section}
-					href={`#${section}`}
+					key={section.id}
+					href={section.href}
 					className="group relative"
 					whileHover={{ x: 4 }}
 					transition={{ type: 'spring', stiffness: 300, damping: 30 }}
@@ -46,12 +47,12 @@ export default function ActiveSectionHighlight() {
 					{/* Indicator dot */}
 					<motion.div
 						className={`w-3 h-3 rounded-full border-2 transition-all ${
-							activeSection === section
+							activeSection === section.id
 								? 'bg-green-500 border-green-400 shadow-lg shadow-green-500/50 scale-125'
 								: 'border-green-400/40 bg-green-400/20 hover:bg-green-400/40'
 						}`}
 						animate={{
-							scale: activeSection === section ? 1.25 : 1,
+							scale: activeSection === section.id ? 1.25 : 1,
 						}}
 						transition={{ type: 'spring', stiffness: 300, damping: 30 }}
 					/>
@@ -63,7 +64,7 @@ export default function ActiveSectionHighlight() {
 						whileHover={{ opacity: 1, x: 0 }}
 						transition={{ duration: 0.2 }}
 					>
-						{section.charAt(0).toUpperCase() + section.slice(1)}
+						{section.label}
 					</motion.div>
 				</motion.a>
 			))}

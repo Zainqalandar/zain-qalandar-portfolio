@@ -1,8 +1,11 @@
 'use client';
 import { motion } from 'framer-motion';
 import { ArrowRight, Mail, Github, Sparkles } from 'lucide-react';
+import { profile } from '@/data/profile';
 
 export default function CTA() {
+	const { ctaSection } = profile;
+
 	return (
 		<section className="mt-24 mb-8 relative z-10">
 			<motion.div
@@ -43,7 +46,7 @@ export default function CTA() {
 					>
 						<Sparkles size={16} className="text-yellow-300 animate-pulse" />
 						<span className="text-sm font-semibold text-white">
-							Ready to work together?
+							{ctaSection.badge}
 						</span>
 					</motion.div>
 
@@ -54,13 +57,13 @@ export default function CTA() {
 						viewport={{ once: true }}
 						className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight"
 					>
-						Let's Build Something{' '}
+						{ctaSection.title}{' '}
 						<motion.span
 							animate={{ color: ['#fbbf24', '#60a5fa', '#34d399'] }}
 							transition={{ duration: 3, repeat: Infinity }}
 							className="inline-block"
 						>
-							Awesome
+							{ctaSection.highlightWord}
 						</motion.span>
 					</motion.h2>
 
@@ -71,7 +74,7 @@ export default function CTA() {
 						viewport={{ once: true }}
 						className="text-lg md:text-xl text-white/90 mb-10 max-w-2xl mx-auto"
 					>
-						Transform your ideas into extraordinary digital experiences. Let's collaborate and create solutions that stand out.
+						{ctaSection.description}
 					</motion.p>
 
 					<motion.div
@@ -82,28 +85,31 @@ export default function CTA() {
 						className="flex flex-col sm:flex-row gap-4 justify-center flex-wrap"
 					>
 						<motion.a
-							href="mailto:bsitf21e68406@gcbskp.edu.pk"
+							href={ctaSection.primaryAction.href}
 							whileHover={{ scale: 1.05, boxShadow: '0 20px 60px rgba(255,255,255,0.3)' }}
 							whileTap={{ scale: 0.95 }}
 							className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-white text-green-600 font-bold shadow-xl hover:shadow-2xl transition-all duration-300"
 						>
 							<Mail size={20} />
-							Start a Conversation
+							{ctaSection.primaryAction.label}
 						</motion.a>
 
-						<motion.a
-							href="https://github.com/Zainqalandar"
-							target="_blank"
-							whileHover={{ scale: 1.05, boxShadow: '0 20px 60px rgba(255,255,255,0.2)' }}
-							whileTap={{ scale: 0.95 }}
-							className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-white/20 backdrop-blur-md text-white font-bold border-2 border-white/50 hover:border-white hover:bg-white/30 transition-all duration-300"
-						>
-							<Github size={20} />
-							View My Work
-							<motion.div animate={{ x: [0, 5, 0] }} transition={{ duration: 1.5, repeat: Infinity }}>
-								<ArrowRight size={20} />
-							</motion.div>
-						</motion.a>
+						{ctaSection.secondaryAction && (
+							<motion.a
+								href={ctaSection.secondaryAction.href}
+								target={ctaSection.secondaryAction.href.startsWith('http') ? '_blank' : undefined}
+								rel={ctaSection.secondaryAction.href.startsWith('http') ? 'noreferrer' : undefined}
+								whileHover={{ scale: 1.05, boxShadow: '0 20px 60px rgba(255,255,255,0.2)' }}
+								whileTap={{ scale: 0.95 }}
+								className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-white/20 backdrop-blur-md text-white font-bold border-2 border-white/50 hover:border-white hover:bg-white/30 transition-all duration-300"
+							>
+								<Github size={20} />
+								{ctaSection.secondaryAction.label}
+								<motion.div animate={{ x: [0, 5, 0] }} transition={{ duration: 1.5, repeat: Infinity }}>
+									<ArrowRight size={20} />
+								</motion.div>
+							</motion.a>
+						)}
 					</motion.div>
 
 					{/* Floating elements */}
@@ -112,9 +118,9 @@ export default function CTA() {
 						transition={{ duration: 3, repeat: Infinity }}
 						className="mt-12 inline-block px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20"
 					>
-						<p className="text-sm text-white/70">
-							💡 Available for freelance & full-time opportunities
-						</p>
+						{ctaSection.note && (
+							<p className="text-sm text-white/70">{ctaSection.note}</p>
+						)}
 					</motion.div>
 				</div>
 			</motion.div>

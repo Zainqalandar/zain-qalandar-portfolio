@@ -1,7 +1,7 @@
 'use client';
 import { motion, useInView } from 'framer-motion';
-import { Code2, Users, Trophy, Zap } from 'lucide-react';
 import { useRef, useState, useEffect } from 'react';
+import { profile } from '@/data/profile';
 
 const AnimatedCounter = ({ target, duration = 2, suffix = '' }) => {
 	const [count, setCount] = useState(0);
@@ -38,36 +38,7 @@ const AnimatedCounter = ({ target, duration = 2, suffix = '' }) => {
 };
 
 export default function Stats() {
-	const stats = [
-		{
-			icon: Code2,
-			label: 'Projects Completed',
-			value: '15',
-			suffix: '+',
-			color: 'from-blue-500 to-cyan-500',
-		},
-		{
-			icon: Users,
-			label: 'Clients Worked With',
-			value: '8',
-			suffix: '+',
-			color: 'from-purple-500 to-pink-500',
-		},
-		{
-			icon: Trophy,
-			label: 'Years Experience',
-			value: '2',
-			suffix: '+',
-			color: 'from-yellow-500 to-orange-500',
-		},
-		{
-			icon: Zap,
-			label: 'Performance Score',
-			value: '98',
-			suffix: '%',
-			color: 'from-green-500 to-emerald-500',
-		},
-	];
+	const { stats } = profile;
 
 	return (
 		<section className="py-16 relative z-10">
@@ -91,7 +62,7 @@ export default function Stats() {
 							className="glass-effect rounded-2xl p-6 text-center group hover:shadow-lg transition-all"
 						>
 							<motion.div
-								className={`w-12 h-12 rounded-xl bg-gradient-to-br ${stat.color} flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform`}
+								className={`w-12 h-12 rounded-xl bg-gradient-to-br ${stat.colorClass} flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform`}
 								whileHover={{ rotate: 10 }}
 							>
 								<Icon className="text-white" size={24} />

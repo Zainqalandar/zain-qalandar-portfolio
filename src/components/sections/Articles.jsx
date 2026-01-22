@@ -1,37 +1,12 @@
 'use client';
 import { motion } from 'framer-motion';
-import { Calendar, User, ArrowRight } from 'lucide-react';
+import { Calendar, ArrowRight } from 'lucide-react';
+import { profile } from '@/data/profile';
 
 export default function Articles() {
-	const articles = [
-		{
-			title: 'Building Scalable React Applications',
-			excerpt:
-				'Learn how to structure your React projects for scalability, manage state effectively, and implement best practices for large-scale applications.',
-			author: 'Zain Qalandar',
-			date: 'Nov 28, 2024',
-			readTime: '8 min read',
-			category: 'React',
-		},
-		{
-			title: 'Next.js 15 Performance Optimization Tips',
-			excerpt:
-				'Discover the latest Next.js features and techniques to optimize your application for faster load times and better user experience.',
-			author: 'Zain Qalandar',
-			date: 'Nov 20, 2024',
-			readTime: '12 min read',
-			category: 'Next.js',
-		},
-		{
-			title: 'Tailwind CSS Best Practices',
-			excerpt:
-				'Master advanced Tailwind CSS techniques, utility-first workflow, and create consistent design systems using Tailwind components.',
-			author: 'Zain Qalandar',
-			date: 'Nov 10, 2024',
-			readTime: '10 min read',
-			category: 'Tailwind',
-		},
-	];
+	const { articles, articlesSection } = profile;
+
+	if (!articles || articles.length === 0) return null;
 
 	return (
 		<section className="mt-20">
@@ -43,7 +18,7 @@ export default function Articles() {
 				style={{ marginBottom: 32 }}
 				className="section-title mb-12 text-center"
 			>
-				Latest Articles
+				{articlesSection?.title}
 			</motion.h2>
 
 			<motion.div
@@ -97,10 +72,10 @@ export default function Articles() {
 							</div>
 
 							<a
-								href="#"
+								href={article.href}
 								className="inline-flex items-center mt-0 gap-2 text-green-600 font-semibold hover:text-green-700 text-sm transition-colors"
 							>
-								Read Article
+								{articlesSection?.readLabel}
 								<ArrowRight size={16} />
 							</a>
 						</div>
@@ -116,10 +91,10 @@ export default function Articles() {
 				className="mt-12 text-center"
 			>
 				<a
-					href="#"
+					href={articlesSection?.ctaHref}
 					className="inline-flex items-center gap-2 btn-primary text-white"
 				>
-					View All Articles
+					{articlesSection?.ctaLabel}
 					<ArrowRight size={20} />
 				</a>
 			</motion.div>

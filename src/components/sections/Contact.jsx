@@ -1,9 +1,11 @@
 'use client'
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Mail, MapPin, Phone, Send, Github, Linkedin, Twitter, CheckCircle2, AlertCircle } from 'lucide-react'
+import { Send, CheckCircle2, AlertCircle } from 'lucide-react'
+import { profile } from '@/data/profile'
 
 export default function Contact() {
+  const { contact, contactSection } = profile
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [subject, setSubject] = useState('')
@@ -21,20 +23,20 @@ export default function Contact() {
     setError('')
 
     if (!name.trim() || !email.trim() || !subject.trim() || !msg.trim()) {
-      setError('Please fill in all fields')
+      setError(contactSection.form.validation.required)
       return
     }
 
     if (!validateEmail(email)) {
-      setError('Please enter a valid email address')
+      setError(contactSection.form.validation.invalidEmail)
       return
     }
 
     const body = encodeURIComponent(
-      `Name: ${name}\nEmail: ${email}\nSubject: ${subject}\n\nMessage:\n${msg}`
+      `${contactSection.form.emailBody.nameLabel}: ${name}\n${contactSection.form.emailBody.emailLabel}: ${email}\n${contactSection.form.emailBody.subjectLabel}: ${subject}\n\n${contactSection.form.emailBody.messageLabel}:\n${msg}`
     )
-    window.location.href = `mailto:bsitf21e68406@gcbskp.edu.pk?subject=${encodeURIComponent(
-      subject || 'Portfolio Contact'
+    window.location.href = `mailto:${contact.email}?subject=${encodeURIComponent(
+      subject || contactSection.form.defaultSubject
     )}&body=${body}`
     setSent(true)
     setName('')
@@ -68,46 +70,6 @@ export default function Contact() {
     },
   }
 
-  const contactInfo = [
-    {
-      icon: Mail,
-      title: 'Email',
-      value: 'bsitf21e68406@gcbskp.edu.pk',
-      href: 'mailto:bsitf21e68406@gcbskp.edu.pk'
-    },
-    {
-      icon: MapPin,
-      title: 'Location',
-      value: 'Sheikhupura, Pakistan'
-    },
-    {
-      icon: Phone,
-      title: 'Response Time',
-      value: '24-48 hours'
-    }
-  ]
-
-  const socialLinks = [
-    {
-      name: 'GitHub',
-      icon: Github,
-      link: 'https://github.com/Zainqalandar',
-      color: 'hover:text-white hover:bg-black/50',
-    },
-    {
-      name: 'LinkedIn',
-      icon: Linkedin,
-      link: 'https://linkedin.com/in/zain-qalandar',
-      color: 'hover:text-blue-400 hover:bg-blue-500/10',
-    },
-    {
-      name: 'Twitter',
-      icon: Twitter,
-      link: 'https://twitter.com/zainqalandar',
-      color: 'hover:text-blue-300 hover:bg-blue-500/10',
-    },
-  ]
-
   return (
     <section id="contact" className="py-20 relative z-10">
       <motion.div
@@ -120,10 +82,10 @@ export default function Contact() {
         {/* Section Title */}
         <motion.div variants={itemVariants} className="mb-16 text-center">
           <h2 className="section-title text-4xl md:text-5xl font-bold mb-4">
-            Get In Touch
+            {contactSection.title}
           </h2>
           <p className="text-gray-300 text-lg max-w-2xl mx-auto font-inter">
-            Have a question or proposal? I'd love to hear from you. Send me a message and I'll get back to you as soon as possible.
+            {contactSection.description}
           </p>
         </motion.div>
 
@@ -134,7 +96,7 @@ export default function Contact() {
           initial="hidden"
           animate="visible"
         >
-          {contactInfo.map((info, idx) => {
+          {contactSection.infoCards.map((info, idx) => {
             const Icon = info.icon
             return (
               <motion.div
@@ -171,22 +133,12 @@ export default function Contact() {
           className="glass-effect rounded-3xl p-8 md:p-12 border border-white/10 hover:border-green-500/30 transition-all duration-300"
         >
           <div className="max-w-3xl mx-auto">
-            <h3 className="text-2xl md:text-3xl font-poppins font-bold text-white mb-3">Send me a message</h3>
+            <h3 className="text-2xl md:text-3xl font-poppins font-bold text-white mb-3">{contactSection.form.title}</h3>
             <p className="text-gray-300 mb-8 font-inter">
-              I'd love to hear about your project. Feel free to reach out and let's discuss how I can help.
+              {contactSection.form.description}
             </p>
 
-            <form onSubmit={(e) => {
-              e.preventDefault()
-              const body = encodeURIComponent(
-                `Name: ${name}\nEmail: ${email}\nSubject: ${subject}\n\nMessage:\n${msg}`
-              )
-              window.location.href = `mailto:bsitf21e68406@gcbskp.edu.pk?subject=${encodeURIComponent(
-                subject || 'Portfolio Contact'
-              )}&body=${body}`
-              setSent(true)
-              setTimeout(() => setSent(false), 3000)
-            }} className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6">
               <motion.div
                 className="grid grid-cols-1 md:grid-cols-2 gap-6"
                 variants={containerVariants}
@@ -201,13 +153,14 @@ export default function Contact() {
                   className="relative"
                 >
                   <label className="block text-sm font-poppins font-semibold text-white mb-2">
-                    Full Name <span className="text-red-400">*</span>
+                    {contactSection.form.labels.name}{' '}
+                    <span className="text-red-400">{contactSection.form.requiredIndicator}</span>
                   </label>
                   <motion.input
                     required
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    placeholder="John Doe"
+                    placeholder={contactSection.form.placeholders.name}
                     className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/20 text-white placeholder:text-gray-400 focus:outline-none focus:border-green-500 focus:bg-white/10 focus:ring-1 focus:ring-green-500/30 transition-all duration-300 font-inter text-base"
                     whileFocus={{ scale: 1.01 }}
                   />
@@ -228,14 +181,15 @@ export default function Contact() {
                   className="relative"
                 >
                   <label className="block text-sm font-poppins font-semibold text-white mb-2">
-                    Email Address <span className="text-red-400">*</span>
+                    {contactSection.form.labels.email}{' '}
+                    <span className="text-red-400">{contactSection.form.requiredIndicator}</span>
                   </label>
                   <motion.input
                     required
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder="john@example.com"
+                    placeholder={contactSection.form.placeholders.email}
                     className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/20 text-white placeholder:text-gray-400 focus:outline-none focus:border-green-500 focus:bg-white/10 focus:ring-1 focus:ring-green-500/30 transition-all duration-300 font-inter text-base"
                     whileFocus={{ scale: 1.01 }}
                   />
@@ -257,13 +211,14 @@ export default function Contact() {
                 className="relative"
               >
                 <label className="block text-sm font-poppins font-semibold text-white mb-2">
-                  Subject <span className="text-red-400">*</span>
+                  {contactSection.form.labels.subject}{' '}
+                  <span className="text-red-400">{contactSection.form.requiredIndicator}</span>
                 </label>
                 <motion.input
                   required
                   value={subject}
                   onChange={(e) => setSubject(e.target.value)}
-                  placeholder="What is this about?"
+                  placeholder={contactSection.form.placeholders.subject}
                   className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/20 text-white placeholder:text-gray-400 focus:outline-none focus:border-green-500 focus:bg-white/10 focus:ring-1 focus:ring-green-500/30 transition-all duration-300 font-inter text-base"
                   whileFocus={{ scale: 1.01 }}
                 />
@@ -284,13 +239,14 @@ export default function Contact() {
                 className="relative"
               >
                 <label className="block text-sm font-poppins font-semibold text-white mb-2">
-                  Message <span className="text-red-400">*</span>
+                  {contactSection.form.labels.message}{' '}
+                  <span className="text-red-400">{contactSection.form.requiredIndicator}</span>
                 </label>
                 <motion.textarea
                   required
                   value={msg}
                   onChange={(e) => setMsg(e.target.value)}
-                  placeholder="Tell me more about your project or inquiry..."
+                  placeholder={contactSection.form.placeholders.message}
                   rows={6}
                   className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/20 text-white placeholder:text-gray-400 focus:outline-none focus:border-green-500 focus:bg-white/10 focus:ring-1 focus:ring-green-500/30 transition-all duration-300 resize-none font-inter text-base"
                   whileFocus={{ scale: 1.01 }}
@@ -324,7 +280,7 @@ export default function Contact() {
                 className="w-full px-6 py-4 rounded-lg bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white font-poppins font-bold text-lg flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transition-all duration-300"
               >
                 <Send size={20} />
-                Send Message
+                {contactSection.form.submitLabel}
               </motion.button>
             </form>
 
@@ -336,7 +292,7 @@ export default function Contact() {
                 className="mt-6 p-4 rounded-lg bg-green-500/20 border border-green-500/50 text-green-300 text-center font-semibold flex items-center justify-center gap-2"
               >
                 <CheckCircle2 size={20} />
-                Message sent successfully! I'll get back to you soon.
+                {contactSection.form.successMessage}
               </motion.div>
             )}
           </div>
@@ -347,25 +303,26 @@ export default function Contact() {
           variants={itemVariants}
           className="mt-16 pt-12 border-t border-white/10 text-center"
         >
-          <h3 className="text-2xl font-poppins font-bold text-white mb-8">Connect With Me</h3>
+          <h3 className="text-2xl font-poppins font-bold text-white mb-8">{contactSection.socialTitle}</h3>
           <motion.div
             className="flex gap-4 justify-center flex-wrap"
             variants={containerVariants}
             initial="hidden"
             animate="visible"
           >
-            {socialLinks.map((social, index) => {
+            {contactSection.socialLinks.map((social, index) => {
               const Icon = social.icon
               return (
                 <motion.a
                   key={index}
-                  href={social.link}
+                  href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
                   variants={itemVariants}
                   whileHover={{ scale: 1.15, rotate: 10 }}
                   whileTap={{ scale: 0.95 }}
-                  className={`p-4 rounded-xl border border-white/20 text-white transition-all duration-300 ${social.color}`}
+                  className={`p-4 rounded-xl border border-white/20 text-white transition-all duration-300 ${social.className || ''}`}
+                  aria-label={social.label}
                 >
                   <Icon size={24} />
                 </motion.a>

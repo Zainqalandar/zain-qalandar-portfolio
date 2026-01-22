@@ -1,7 +1,8 @@
-import { Metadata } from 'next';
 import { Poppins, Inter } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider, ThemeWidget } from '@/components';
+import { profile } from '@/data/profile';
+import { validateProfile } from '@/lib/validateProfile';
 
 const poppins = Poppins({
 	variable: '--font-poppins',
@@ -15,18 +16,19 @@ const inter = Inter({
 	weight: ['300', '400', '500', '600', '700', '800'],
 });
 
+validateProfile(profile);
+
 export const metadata = {
-	title: 'Syed Zain Qalandar — Full-Stack (MERN) Developer | React & Next.js',
-	description:
-		'Full-Stack (MERN) developer specializing in React, Next.js, and Tailwind CSS. Expertise in building modern, responsive web applications.',
-	keywords: 'MERN stack, React developer, Next.js, Full-stack, Web developer, Tailwind CSS',
+	title: profile.seo.siteTitle,
+	description: profile.seo.siteDescription,
+	keywords: profile.seo.keywords,
 	openGraph: {
-		title: 'Syed Zain Qalandar — Full-Stack Developer',
-		description: 'Building beautiful, responsive web applications with React and Next.js',
-		image: '/images/profile.png',
+		title: profile.seo.openGraphTitle ?? profile.seo.siteTitle,
+		description: profile.seo.openGraphDescription ?? profile.seo.siteDescription,
+		image: profile.seo.ogImage ?? profile.images.avatar,
 	},
 	icons: {
-		icon: '/images/profile.png',
+		icon: profile.seo.ogImage ?? profile.images.avatar,
 	},
 };
 

@@ -1,13 +1,7 @@
 "use client";
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useTheme } from '@/components/layout/ThemeProvider';
-
-const THEME_META = [
-  { id: 'dark', title: 'Dark', hint: 'Default' },
-  { id: 'light', title: 'Light', hint: 'Bright' },
-  { id: 'solar', title: 'Solar', hint: 'Warm' },
-  { id: 'midnight', title: 'Midnight', hint: 'Violet' },
-];
+import { profile } from '@/data/profile';
 
 function Swatch({ colors = [], active }) {
   return (
@@ -22,29 +16,29 @@ function Swatch({ colors = [], active }) {
 }
 
 export default function ThemeSwitcher({ className = '' }) {
-  const { theme, setTheme, themes } = useTheme();
+  const { theme, setTheme } = useTheme();
   const [open, setOpen] = useState(false);
+  const { themeSwitcher } = profile.ui;
+  const options = themeSwitcher.options;
 
-  const themeColors = {
-    dark: ['#0f172a', '#064e3b', '#0d3d2c'],
-    light: ['#f8fafc', '#eef2ff', '#f0f9ff'],
-    solar: ['#fff7ed', '#ffedd5', '#fff1e0'],
-    midnight: ['#0b1020', '#071229', '#00121a'],
-  };
+  const themeColors = Object.fromEntries(
+    options.map((option) => [option.id, option.colors])
+  );
+  const activeOption = options.find((option) => option.id === theme);
 
   return (
     <div className={`relative ${className} select-none`}>
       {/* Desktop: inline picker */}
       <div className="hidden md:flex items-center gap-3">
-        <div className="text-xs text-gray-300 mr-2">Theme</div>
+        <div className="text-xs text-gray-300 mr-2">{themeSwitcher.label}</div>
         <div className="flex items-center gap-2 bg-black/10 p-2 rounded-xl border border-white/6 glass-effect">
-          {THEME_META.map((t) => (
+          {options.map((t) => (
             <button
               key={t.id}
               aria-pressed={theme === t.id}
               onClick={() => setTheme(t.id)}
               className={`flex items-center gap-2 px-2 py-1 rounded-md hover:scale-105 transition-transform focus:outline-none focus:ring-2 focus:ring-offset-1 ${theme === t.id ? 'ring-2 ring-offset-1 ring-green-400/40' : ''}`}
-              title={`${t.title} — ${t.hint}`}
+              title={`${t.title}${themeSwitcher.titleSeparator}${t.hint}`}
             >
               <Swatch colors={themeColors[t.id]} active={theme === t.id} />
               <div className="text-left">
@@ -67,12 +61,12 @@ export default function ThemeSwitcher({ className = '' }) {
           <div className="w-8 h-8 rounded-md overflow-hidden">
             <div style={{ background: themeColors[theme]?.[0] || '#222' }} className="w-full h-full" />
           </div>
-          <span className="text-sm font-medium">{theme?.charAt(0).toUpperCase() + theme?.slice(1)}</span>
+          <span className="text-sm font-medium">{activeOption?.title || theme}</span>
         </button>
 
         {open && (
           <div className="absolute right-0 mt-2 w-44 bg-slate-900/95 backdrop-blur rounded-xl border border-white/8 py-2 shadow-xl z-50">
-            {THEME_META.map((t) => (
+            {options.map((t) => (
               <button
                 key={t.id}
                 onClick={() => {

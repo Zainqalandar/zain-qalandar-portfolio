@@ -1,14 +1,10 @@
 'use client';
 import { motion } from 'framer-motion';
-import education from '@/data/education.json';
-import { Award, MapPin, Briefcase } from 'lucide-react';
+import { Award } from 'lucide-react';
+import { profile } from '@/data/profile';
 
 export default function About() {
-	const iconMap = {
-		'Education': Award,
-		'Location': MapPin,
-		'Availability': Briefcase
-	};
+	const { about } = profile;
 
 	const containerVariants = {
 		hidden: { opacity: 0 },
@@ -52,31 +48,45 @@ export default function About() {
 					transition={{ duration: 0.5 }}
 					viewport={{ once: true }}
 				>
-					About Me
+					{about.title}
 				</motion.h2>
-			<motion.p 
-				className="text-green-700 dark:text-green-300 leading-relaxed text-lg mb-8 font-inter"
-				initial={{ opacity: 0, y: 10 }}
-				whileInView={{ opacity: 1, y: 0 }}
-				transition={{ duration: 0.6, delay: 0.1 }}
-				viewport={{ once: true }}
-			>
-				I'm a passionate{' '}
-				<span className="gradient-text font-bold">
-					Full-Stack Developer (MERN)
-				</span>
-				, front-end focused with strong experience in building responsive user interfaces using React, Next.js and Tailwind CSS. I'm also familiar with Node.js, Express and MongoDB for APIs and data management. I love translating Figma designs into production-ready code while optimizing performance and user experience.
-			</motion.p>
-
-			<motion.p 
-				className="text-green-700 dark:text-green-300 leading-relaxed text-lg mb-10 font-inter"
-				initial={{ opacity: 0, y: 10 }}
-				whileInView={{ opacity: 1, y: 0 }}
-				transition={{ duration: 0.6, delay: 0.2 }}
-				viewport={{ once: true }}
-			>
-				Beyond coding, I'm passionate about open-source contributions, mentoring junior developers, and staying updated with the latest web technologies. I believe in writing clean, maintainable code and delivering solutions that exceed expectations.
-			</motion.p>				
+				{about.intro ? (
+					<motion.p 
+						className="text-green-700 dark:text-green-300 leading-relaxed text-lg mb-8 font-inter"
+						initial={{ opacity: 0, y: 10 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.6, delay: 0.1 }}
+						viewport={{ once: true }}
+					>
+						{about.intro.prefix}
+						<span className="gradient-text font-bold">
+							{about.intro.highlight}
+						</span>
+						{about.intro.suffix}
+					</motion.p>
+				) : (
+					<motion.p 
+						className="text-green-700 dark:text-green-300 leading-relaxed text-lg mb-8 font-inter"
+						initial={{ opacity: 0, y: 10 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.6, delay: 0.1 }}
+						viewport={{ once: true }}
+					>
+						{about.longBio}
+					</motion.p>
+				)}
+				{about.paragraphs.map((paragraph, idx) => (
+					<motion.p
+						key={idx}
+						className="text-green-700 dark:text-green-300 leading-relaxed text-lg mb-10 font-inter"
+						initial={{ opacity: 0, y: 10 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.6, delay: 0.2 + idx * 0.1 }}
+						viewport={{ once: true }}
+					>
+						{paragraph}
+					</motion.p>
+				))}
 			<motion.div 
 				className="mt-10 grid gap-6 md:grid-cols-3"
 				initial="hidden"
@@ -84,11 +94,11 @@ export default function About() {
 				variants={containerVariants}
 				viewport={{ once: true }}
 			>
-					{education.map((edu, idx) => {
-						const Icon = iconMap[edu.title] || Award;
+					{about.summaryCards.map((card) => {
+						const Icon = card.icon || Award;
 						return (
 							<motion.div
-								key={edu.id}
+								key={card.title}
 								variants={itemVariants}
 								className="glass-effect rounded-2xl p-6 card-hover group relative overflow-hidden"
 								whileHover={{ 
@@ -110,13 +120,13 @@ export default function About() {
 									</motion.div>
 									<div>
 										<div className="text-sm text-green-600 dark:text-green-400 font-inter font-medium uppercase tracking-wide">
-											{edu.title}
+											{card.title}
 										</div>
 										<motion.div 
 											className="font-poppins font-bold text-green-800 dark:text-green-100 text-lg"
 											whileHover={{ color: '#4ade80' }}
 										>
-											{edu.content}
+											{card.value}
 										</motion.div>
 									</div>
 								</div>

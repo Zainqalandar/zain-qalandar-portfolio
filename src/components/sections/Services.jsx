@@ -1,34 +1,9 @@
 'use client';
 import { motion } from 'framer-motion';
-import { Zap, Palette, Code, Smartphone } from 'lucide-react';
+import { profile } from '@/data/profile';
 
 export default function Services() {
-	const services = [
-		{
-			icon: Code,
-			title: 'Full-Stack Development',
-			description:
-				'End-to-end web application development using MERN stack with scalable architecture and best practices.',
-		},
-		{
-			icon: Palette,
-			title: 'UI/UX Implementation',
-			description:
-				'Converting Figma designs into responsive, pixel-perfect React and Next.js components with smooth animations.',
-		},
-		{
-			icon: Smartphone,
-			title: 'Responsive Design',
-			description:
-				'Mobile-first approach ensuring your application looks and functions beautifully on all devices and screen sizes.',
-		},
-		{
-			icon: Zap,
-			title: 'Performance Optimization',
-			description:
-				'Optimizing applications for speed and efficiency through code splitting, lazy loading, and caching strategies.',
-		},
-	];
+	const { services } = profile;
 
 	return (
 		<section id="services" className="mt-20">
@@ -40,7 +15,7 @@ export default function Services() {
 				style={{ marginBottom: 32 }}
 				className="section-title mb-24 text-center"
 			>
-				Services & Expertise
+				{services.title}
 			</motion.h2>
 
 			<motion.div
@@ -55,7 +30,7 @@ export default function Services() {
 				}}
 				className="grid gap-8 md:grid-cols-2"
 			>
-				{services.map((service, idx) => {
+				{services.items.map((service, idx) => {
 					const Icon = service.icon;
 					return (
 						<motion.div

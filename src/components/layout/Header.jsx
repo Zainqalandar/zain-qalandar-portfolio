@@ -4,22 +4,25 @@ import Image from 'next/image';
 import { Menu, X, Zap } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import navLinks from '@/data/navLinks.json';
+import { profile } from '@/data/profile';
 
 export default function Header() {
 	const [open, setOpen] = useState(false);
 	const [scrolled, setScrolled] = useState(false);
-	const [activeSection, setActiveSection] = useState('hero');
+	const [activeSection, setActiveSection] = useState(profile.sections[0]?.id || 'hero');
+	const navLinks = profile.sections.filter((section) => section.showInNav !== false);
+	const trackedSections = profile.sections
+		.filter((section) => section.showInHighlight !== false)
+		.map((section) => section.id);
 
 	useEffect(() => {
 		const handleScroll = () => {
 			setScrolled(window.scrollY > 50);
 
 			// Update active section
-			const sections = ['hero', 'about', 'services', 'experience', 'skills', 'projects', 'testimonials', 'faq', 'contact'];
-			let current = 'hero';
+			let current = trackedSections[0] || 'hero';
 
-			for (const section of sections) {
+			for (const section of trackedSections) {
 				const element = document.getElementById(section);
 				if (element) {
 					const rect = element.getBoundingClientRect();
@@ -80,7 +83,7 @@ export default function Header() {
 					whileHover={{ scale: 1.05 }}
 					whileTap={{ scale: 0.95 }}
 				>
-					<Link href="#" className="flex items-center gap-3 group">
+					<Link href={profile.sections[0]?.href || '#'} className="flex items-center gap-3 group">
 						<motion.div
 							whileHover={{ rotate: 360, scale: 1.1 }}
 							transition={{ duration: 0.6 }}
@@ -88,8 +91,8 @@ export default function Header() {
 						>
 							<div className="absolute inset-0 bg-gradient-to-br from-green-500/20 to-emerald-500/20 opacity-0 group-hover:opacity-100 transition-opacity" />
 							<Image
-								src="/images/profile.png"
-								alt="Zain"
+								src={profile.images.avatar}
+								alt={profile.images.avatarAlt}
 								width={44}
 								height={44}
 								className="object-cover"
@@ -97,11 +100,11 @@ export default function Header() {
 						</motion.div>
 						<div className="flex flex-col">
 							<div className="text-lg font-poppins font-bold text-white group-hover:text-green-400 transition-colors">
-								Zain Qalandar
+								{profile.basic.brandName ?? profile.basic.fullName}
 							</div>
 							<div className="text-xs text-gray-400 group-hover:text-green-300 transition-colors flex items-center gap-1 font-inter">
 								<Zap size={10} className="text-yellow-400" />
-								Full-Stack Developer
+								{profile.basic.headline}
 							</div>
 						</div>
 					</Link>
@@ -118,7 +121,7 @@ export default function Header() {
 						const active = isLinkActive(link.href);
 						return (
 							<motion.a
-								key={link.name}
+								key={link.label}
 								href={link.href}
 								variants={itemVariants}
 								className={`relative group px-4 py-2 text-sm font-inter font-medium transition-colors ${
@@ -126,7 +129,7 @@ export default function Header() {
 								}`}
 								onClick={() => setOpen(false)}
 							>
-								{link.name}
+								{link.label}
 								<motion.span
 									layoutId="underline"
 									className="absolute left-0 -bottom-1 h-[2px] bg-gradient-to-r from-green-400 to-emerald-400"
@@ -146,21 +149,23 @@ export default function Header() {
 						);
 					})}
 
-					<motion.a
-						variants={itemVariants}
-						href="/cv/ZainQalandar-FullStack(Mern)-CV-1.pdf"
-						target="_blank"
-						rel="noopener noreferrer"
-						aria-label="Open resume in a new tab"
-						whileHover={{ scale: 1.05, boxShadow: '0 10px 30px rgba(34, 197, 94, 0.3)' }}
-						whileTap={{ scale: 0.95 }}
-						className="ml-6 px-6 py-2 rounded-xl bg-gradient-to-r from-green-500 to-emerald-500 text-white font-poppins font-semibold shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2"
-					>
-						Resume
-						<motion.div animate={{ x: [0, 3, 0] }} transition={{ duration: 1.5, repeat: Infinity }}>
-							→
-						</motion.div>
-					</motion.a>
+					{profile.resume?.resumeUrl && profile.resume?.label && (
+						<motion.a
+							variants={itemVariants}
+							href={profile.resume.resumeUrl}
+							target="_blank"
+							rel="noopener noreferrer"
+							aria-label={profile.resume.ariaLabel ?? profile.ui.resumeAriaLabel}
+							whileHover={{ scale: 1.05, boxShadow: '0 10px 30px rgba(34, 197, 94, 0.3)' }}
+							whileTap={{ scale: 0.95 }}
+							className="ml-6 px-6 py-2 rounded-xl bg-gradient-to-r from-green-500 to-emerald-500 text-white font-poppins font-semibold shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2"
+						>
+							{profile.resume.label}
+							<motion.div animate={{ x: [0, 3, 0] }} transition={{ duration: 1.5, repeat: Infinity }}>
+								{profile.ui.resumeIndicator}
+							</motion.div>
+						</motion.a>
+					)}
 				</motion.nav>
 
 					{/* Theme switcher removed from header - global floating widget used instead */}
@@ -169,7 +174,7 @@ export default function Header() {
 				<motion.button
 					className="lg:hidden p-2 rounded-lg hover:bg-white/10 transition text-white"
 					onClick={() => setOpen(!open)}
-					aria-label="menu"
+					aria-label={profile.ui.menuAriaLabel}
 					aria-controls="mobile-nav"
 					aria-expanded={open}
 					whileHover={{ scale: 1.1 }}
@@ -205,7 +210,7 @@ export default function Header() {
 							>
 								{/* Close button inside overlay for easier access on tablets */}
 								<button
-									aria-label="Close menu"
+									aria-label={profile.ui.closeMenuLabel}
 									className="absolute right-4 top-4 p-2 rounded-md text-white hover:bg-white/5"
 									onClick={() => setOpen(false)}
 								>
@@ -218,7 +223,7 @@ export default function Header() {
 									const active = isLinkActive(link.href);
 									return (
 										<motion.a
-											key={link.name}
+											key={link.label}
 											href={link.href}
 											variants={itemVariants}
 											className={`font-inter font-medium transition-colors px-4 py-3 rounded-lg text-center ${
@@ -228,23 +233,25 @@ export default function Header() {
 											}`}
 											onClick={() => setOpen(false)}
 										>
-											{link.name}
+											{link.label}
 										</motion.a>
 									);
 								})}
-								<motion.a
-									variants={itemVariants}
-									href="/cv/ZainQalandar-FullStack(Mern)-CV-1.pdf"
-									target="_blank"
-									rel="noopener noreferrer"
-									aria-label="Open resume in a new tab"
-									whileHover={{ scale: 1.02 }}
-									whileTap={{ scale: 0.98 }}
-									className="mt-2 px-4 py-3 rounded-xl bg-gradient-to-r from-green-500 to-emerald-500 text-white font-poppins font-semibold shadow-lg text-center transition-all duration-300"
-									onClick={() => setOpen(false)}
-								>
-									Resume
-								</motion.a>
+								{profile.resume?.resumeUrl && profile.resume?.label && (
+									<motion.a
+										variants={itemVariants}
+										href={profile.resume.resumeUrl}
+										target="_blank"
+										rel="noopener noreferrer"
+										aria-label={profile.resume.ariaLabel ?? profile.ui.resumeAriaLabel}
+										whileHover={{ scale: 1.02 }}
+										whileTap={{ scale: 0.98 }}
+										className="mt-2 px-4 py-3 rounded-xl bg-gradient-to-r from-green-500 to-emerald-500 text-white font-poppins font-semibold shadow-lg text-center transition-all duration-300"
+										onClick={() => setOpen(false)}
+									>
+										{profile.resume.label}
+									</motion.a>
+								)}
 							</motion.div>
 						</motion.div>
 					)}

@@ -1,9 +1,14 @@
 'use client';
 import Image from 'next/image';
-import { Linkedin, Mail, Github, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { profile } from '@/data/profile';
 
 export default function Hero() {
+	const { hero, basic, images, primaryCta, secondaryCta } = profile;
+	const displayName = basic.displayName ?? basic.fullName;
+	const isExternal = (href) => /^https?:\/\//.test(href);
+
 	const containerVariants = {
 		hidden: { opacity: 0 },
 		visible: {
@@ -35,9 +40,12 @@ export default function Hero() {
 					<div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
 						{/* Left - text block */}
 						<motion.div initial="hidden" animate="visible" variants={containerVariants} className="space-y-6">
-							<motion.span variants={itemVariants} className="text-sm text-emerald-300 font-medium">Welcome to my portfolio</motion.span>
+							<motion.span variants={itemVariants} className="text-sm text-emerald-300 font-medium">
+								{hero.welcome}
+							</motion.span>
 							<motion.h1 variants={itemVariants} className="text-5xl md:text-6xl font-poppins font-extrabold leading-tight text-white">
-								Hello, my name's <motion.span
+								{hero.greetingPrefix}{' '}
+								<motion.span
 									className="inline-block"
 									style={{
 										backgroundImage: 'linear-gradient(90deg, #34D399, #06B6D4, #60A5FA)',
@@ -52,25 +60,34 @@ export default function Hero() {
 									transition={{ duration: 4, repeat: Infinity, ease: 'linear' }}
 									whileHover={{ scale: 1.04 }}
 								>
-									Syed Zain
+									{displayName}
 								</motion.span>
 							</motion.h1>
 							<motion.p variants={itemVariants} className="text-gray-300 max-w-lg mt-2 font-inter">
-								I'm a Front-end focused Full-Stack (MERN) developer building accessible, performant interfaces and solid backends.
+								{hero.subheading}
 							</motion.p>
 
 							<motion.div variants={itemVariants} className="flex flex-wrap gap-4 mt-6">
-								<a href="/cv/ZainQalandar-FullStack(Mern)-CV-1.pdf" download="ZainQalandar-CV.pdf" className="btn-primary px-5 py-3 rounded-full font-poppins font-semibold flex items-center gap-3 bg-green-500 hover:bg-emerald-500 transition-colors text-white" aria-label="Download CV">
-									Download CV
-								</a>
-								<a href="#projects" className="flex items-center gap-3 border border-green-500/30 text-green-200 px-5 py-3 rounded-full font-poppins hover:bg-green-600/10 transition">
-									See my work <ArrowRight size={14} />
-								</a>
+								{primaryCta && (
+									<a
+										href={primaryCta.href}
+										download={primaryCta.download}
+										className="btn-primary px-5 py-3 rounded-full font-poppins font-semibold flex items-center gap-3 bg-green-500 hover:bg-emerald-500 transition-colors text-white"
+										aria-label={primaryCta.label}
+									>
+										{primaryCta.label}
+									</a>
+								)}
+								{secondaryCta && (
+									<a href={secondaryCta.href} className="flex items-center gap-3 border border-green-500/30 text-green-200 px-5 py-3 rounded-full font-poppins hover:bg-green-600/10 transition">
+										{secondaryCta.label} <ArrowRight size={14} />
+									</a>
+								)}
 							</motion.div>
 
 							{/* Small footer note and scroll indicator */}
 							<div className="mt-8 flex items-center gap-6">
-								<div className="text-xs text-gray-400">Scroll down</div>
+								<div className="text-xs text-gray-400">{hero.scrollHint}</div>
 								<div className="w-6 h-10 border-2 border-green-600 rounded-full flex items-start justify-center p-1">
 									<div className="w-1 h-1 bg-green-400 rounded-full animate-bounce" />
 								</div>
@@ -83,21 +100,28 @@ export default function Hero() {
 								{/* Decorative ring */}
 								<div className="absolute -inset-2 rounded-full bg-gradient-to-r from-green-400/10 to-emerald-300/10 blur-lg" />
 								<div className="relative w-72 h-72 md:w-80 md:h-80 rounded-full ring-8 ring-emerald-700/30 overflow-hidden shadow-2xl bg-gradient-to-br from-slate-800/60 to-slate-700/40">
-									<Image src="/images/profile.png" alt="Zain" width={320} height={320} className="object-cover w-full h-full" priority />
+									<Image src={images.avatar} alt={images.avatarAlt} width={320} height={320} className="object-cover w-full h-full" priority />
 								</div>
 								{/* Floating accents */}
 								<motion.div animate={{ rotate: [0, 10, -10, 0] }} transition={{ duration: 6, repeat: Infinity }} className="absolute -right-6 -top-6 w-12 h-12 bg-emerald-400/20 rounded-lg blur-sm" />
 								{/* Social vertical */}
 								<div className="absolute right-0 top-1/2 transform -translate-y-1/2 flex flex-col gap-3 pr-4">
-									<a href="https://github.com/Zainqalandar" target="_blank" rel="noreferrer" className="w-10 h-10 flex items-center justify-center rounded-full bg-slate-900/30 border border-green-500/20 text-green-300 hover:bg-green-600/10 transition">
-										<Github size={16} />
-									</a>
-									<a href="https://www.linkedin.com/in/zainqalandar-online" target="_blank" rel="noreferrer" className="w-10 h-10 flex items-center justify-center rounded-full bg-slate-900/30 border border-blue-500/10 text-blue-300 hover:bg-blue-600/10 transition">
-										<Linkedin size={16} />
-									</a>
-									<a href="mailto:bsitf21e68406@gcbskp.edu.pk" className="w-10 h-10 flex items-center justify-center rounded-full bg-slate-900/30 border border-emerald-500/10 text-emerald-300 hover:bg-emerald-600/10 transition">
-										<Mail size={16} />
-									</a>
+									{hero.socialLinks.map((link) => {
+										const Icon = link.icon;
+										const external = isExternal(link.href);
+										return (
+											<a
+												key={link.label}
+												href={link.href}
+												target={external ? '_blank' : undefined}
+												rel={external ? 'noreferrer' : undefined}
+												className={link.className}
+												aria-label={link.label}
+											>
+												<Icon size={16} />
+											</a>
+										);
+									})}
 								</div>
 							</div>
 						</motion.div>
