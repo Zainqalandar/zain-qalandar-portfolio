@@ -7,6 +7,9 @@
 @tailwind utilities;
 
 :root {
+  --font-inter: 'Inter';
+  --font-poppins: 'Poppins';
+
   /* Core color tokens (will be overwritten by theme classes) */
   --accent: #22c55e;
   --accent-2: #10b981;
@@ -613,6 +616,5 @@ button:active::before, [role="button"]:active::before {
   width: 300px;
   height: 300px;
 }
-
 
 

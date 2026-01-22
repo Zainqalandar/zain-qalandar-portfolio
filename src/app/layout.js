@@ -1,20 +1,7 @@
-import { Poppins, Inter } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider, ThemeWidget } from '@/components';
 import { profile } from '@/data/profile';
 import { validateProfile } from '@/lib/validateProfile';
-
-const poppins = Poppins({
-	variable: '--font-poppins',
-	subsets: ['latin'],
-	weight: ['300', '400', '500', '600', '700', '800', '900'],
-});
-
-const inter = Inter({
-	variable: '--font-inter',
-	subsets: ['latin'],
-	weight: ['300', '400', '500', '600', '700', '800'],
-});
 
 validateProfile(profile);
 
@@ -34,7 +21,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
 	return (
-		<html lang="en" className={`${poppins.variable} ${inter.variable}`}>
+		<html lang="en">
 			<head>
 				<meta name="theme-color" content="#10b981" />
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
