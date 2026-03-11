@@ -33,14 +33,14 @@ export const profile = {
 		avatarAlt: 'Syed Zain Qalandar',
 	},
 	contact: {
-		email: 'bsitf21e68406@gcbskp.edu.pk',
+		email: 'zainqlandar@gmail.com',
 		website: 'https://zainqalandar.com',
 	},
 	socials: {
 		github: 'https://github.com/Zainqalandar',
 		linkedin: 'https://www.linkedin.com/in/zainqalandar-online',
 		twitter: 'https://twitter.com/zainqalandar',
-		instagram: 'https://instagram.com/zainqalandar.brand',
+		instagram: 'https://instagram.com/zainqalandar',
 		facebook: '#',
 	},
 	resume: {
@@ -91,7 +91,7 @@ export const profile = {
 			},
 			{
 				label: 'Email',
-				href: 'mailto:bsitf21e68406@gcbskp.edu.pk',
+				href: 'mailto:zainqlandar@gmail.com',
 				icon: Mail,
 				className:
 					'w-10 h-10 flex items-center justify-center rounded-full bg-slate-900/30 border border-emerald-500/10 text-emerald-300 hover:bg-emerald-600/10 transition',
@@ -102,28 +102,28 @@ export const profile = {
 		{
 			icon: Code2,
 			label: 'Projects Completed',
-			value: 15,
+			value: 50,
 			suffix: '+',
 			colorClass: 'from-blue-500 to-cyan-500',
 		},
 		{
 			icon: Users,
 			label: 'Clients Worked With',
-			value: 8,
+			value: 10,
 			suffix: '+',
 			colorClass: 'from-purple-500 to-pink-500',
 		},
 		{
 			icon: Trophy,
 			label: 'Years Experience',
-			value: 2,
+			value: 3,
 			suffix: '+',
 			colorClass: 'from-yellow-500 to-orange-500',
 		},
 		{
 			icon: Zap,
 			label: 'Performance Score',
-			value: 98,
+			value: 95,
 			suffix: '%',
 			colorClass: 'from-green-500 to-emerald-500',
 		},
@@ -139,7 +139,7 @@ export const profile = {
 				', front-end focused with strong experience in building responsive user interfaces using React, Next.js and Tailwind CSS. I\'m also familiar with Node.js, Express and MongoDB for APIs and data management. I love translating Figma designs into production-ready code while optimizing performance and user experience.',
 		},
 		paragraphs: [
-			"Beyond coding, I'm passionate about open-source contributions, mentoring junior developers, and staying updated with the latest web technologies. I believe in writing clean, maintainable code and delivering solutions that exceed expectations.",
+			"Beyond coding, I'm passionate about open-source contributions, mentoring developers, and staying updated with the latest web technologies. I believe in writing clean, maintainable code and delivering solutions that exceed expectations.",
 		],
 		highlights: [
 			'Front-end focused MERN developer with a love for polished UI work.',
@@ -189,25 +189,36 @@ export const profile = {
 	},
 	experience: [
 		{
-			role: 'Frontend Developer',
-			company: 'KodeStudio',
-			start: '2024',
-			end: 'Present',
+			role: 'Next.js Developer',
+			company: 'StepSharp Digital Pty Ltd, South Australia',
+			start: 'Nov 2025',
+			end: 'present',
 			bullets: [
-				'Building responsive web interfaces with Next.js and Tailwind CSS. Collaborating with design team to convert Figma designs into production-ready components.',
+				'Developed scalable admin dashboards and management systems using Next.js, with a focus on maintainable architecture and clean code practices. Implemented robust form validation and type-safe data handling using Zod, while improving application performance and reliability through optimization and efficient state management.',
 			],
-			tech: ['Next.js', 'React', 'Tailwind CSS', 'Figma'],
+			tech: ['Next.js', 'Rizz UI', 'Zod', 'Jotai', 'Docker', 'Node.js', 'MongoDB'],
 		},
 		{
-			role: 'MERN Stack Developer',
+			role: 'Freelance Web Designer & Developer',
 			company: 'Freelance',
-			start: '2023',
-			end: '2024',
+			start: 'Dec 2024',
+			end: 'Aug 2025',
 			bullets: [
-				'Developed full-stack web applications using MongoDB, Express, React, and Node.js. Implemented JWT authentication, REST APIs, and responsive UI designs.',
+				'Designed and developed custom websites for local clients, delivering complete front-end solutions from concept to deployment. Collaborated directly with clients to refine requirements and improve user experience across different devices.',
 			],
-			tech: ['React', 'Node.js', 'MongoDB', 'Express', 'Redux'],
+			tech: ['React',  'Next.js', 'Tailwind CSS', 'Material UI', 'Chakra UI', 'Vercel'],
+			// tech: ['React', 'Node.js', 'MongoDB', 'Express', 'Redux'],
 		},
+		{
+			role: 'Junior Frontend Developer',
+			company: 'KodeStudio Company, SKP',
+			start: 'Aug 2023',
+			end: 'Nov 2024',
+			bullets: [
+				'Built responsive web interfaces using React.js and modern CSS frameworks, with a strong focus on mobile-first design and cross-browser compatibility. Translated Figma designs into pixel-accurate frontend layouts while strengthening core React concepts such as component architecture, state handling, and reusable UI development.',
+			],
+			tech: ['HTML', 'CSS', 'JavaScript', 'TypeScript', 'Git & GitHub' , 'React', 'Redux', 'Tailwind CSS'],
+		}
 	],
 	skills: {
 		title: 'Technical Skills',
@@ -218,11 +229,11 @@ export const profile = {
 			},
 			{
 				title: 'Backend',
-				items: ['Node.js', 'Express', 'MongoDB', 'Appwrite'],
+				items: ['Node.js', 'Express', 'MongoDB', 'Appwrite', 'Firebase'],
 			},
 			{
 				title: 'Tools & Others',
-				items: ['Redux Toolkit', 'Git', 'Vercel'],
+				items: ['Git & GitHub', 'Vercel', 'Docker'],
 			},
 		],
 		itemPrefix: '✓',
@@ -231,9 +242,9 @@ export const profile = {
 			items: [
 				{ name: 'React & Next.js', level: 95 },
 				{ name: 'Tailwind CSS', level: 95 },
-				{ name: 'JavaScript/ES6+', level: 90 },
-				{ name: 'Node.js & Express', level: 85 },
-				{ name: 'MongoDB', level: 85 },
+				{ name: 'JavaScript/ES6+', level: 80 },
+				{ name: 'Node.js & Express', level: 50 },
+				{ name: 'MongoDB', level: 50 },
 			],
 		},
 	},
@@ -417,7 +428,7 @@ export const profile = {
 			"Transform your ideas into extraordinary digital experiences. Let's collaborate and create solutions that stand out.",
 		primaryAction: {
 			label: 'Start a Conversation',
-			href: 'mailto:bsitf21e68406@gcbskp.edu.pk',
+			href: 'mailto:zainqlandar@gmail.com',
 		},
 		secondaryAction: {
 			label: 'View My Work',
@@ -432,8 +443,8 @@ export const profile = {
 		infoCards: [
 			{
 				title: 'Email',
-				value: 'bsitf21e68406@gcbskp.edu.pk',
-				href: 'mailto:bsitf21e68406@gcbskp.edu.pk',
+				value: 'zainqlandar@gmail.com',
+				href: 'mailto:zainqlandar@gmail.com',
 				icon: Mail,
 			},
 			{
@@ -513,14 +524,14 @@ export const profile = {
 		socialLinks: [
 			{
 				label: 'Email',
-				href: 'mailto:bsitf21e68406@gcbskp.edu.pk',
+				href: 'mailto:zainqlandar@gmail.com',
 				icon: Mail,
 				className:
 					'p-3 rounded-lg border border-white/20 text-gray-400 hover:text-green-400 hover:border-green-500/50 transition-all duration-300',
 			},
 			{
 				label: 'Instagram',
-				href: 'https://instagram.com/zainqalandar.brand',
+				href: 'https://instagram.com/zainqalandar',
 				icon: Instagram,
 				className:
 					'p-3 rounded-lg border border-white/20 text-gray-400 hover:text-pink-400 hover:border-pink-500/50 transition-all duration-300',

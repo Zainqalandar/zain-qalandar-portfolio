@@ -33,14 +33,14 @@ export const profileExample = {
 		avatarAlt: 'Syed Zain Qalandar',
 	},
 	contact: {
-		email: 'bsitf21e68406@gcbskp.edu.pk',
+		email: 'zainqlandar@gmail.com',
 		website: 'https://zainqalandar.com',
 	},
 	socials: {
 		github: 'https://github.com/Zainqalandar',
 		linkedin: 'https://www.linkedin.com/in/zainqalandar-online',
 		twitter: 'https://twitter.com/zainqalandar',
-		instagram: 'https://instagram.com/zainqalandar.brand',
+		instagram: 'https://instagram.com/zainqalandar',
 		facebook: '#',
 	},
 	resume: {
@@ -91,7 +91,7 @@ export const profileExample = {
 			},
 			{
 				label: 'Email',
-				href: 'mailto:bsitf21e68406@gcbskp.edu.pk',
+				href: 'mailto:zainqlandar@gmail.com',
 				icon: Mail,
 				className:
 					'w-10 h-10 flex items-center justify-center rounded-full bg-slate-900/30 border border-emerald-500/10 text-emerald-300 hover:bg-emerald-600/10 transition',
@@ -417,7 +417,7 @@ export const profileExample = {
 			"Transform your ideas into extraordinary digital experiences. Let's collaborate and create solutions that stand out.",
 		primaryAction: {
 			label: 'Start a Conversation',
-			href: 'mailto:bsitf21e68406@gcbskp.edu.pk',
+			href: 'mailto:zainqlandar@gmail.com',
 		},
 		secondaryAction: {
 			label: 'View My Work',
@@ -432,8 +432,8 @@ export const profileExample = {
 		infoCards: [
 			{
 				title: 'Email',
-				value: 'bsitf21e68406@gcbskp.edu.pk',
-				href: 'mailto:bsitf21e68406@gcbskp.edu.pk',
+				value: 'zainqlandar@gmail.com',
+				href: 'mailto:zainqlandar@gmail.com',
 				icon: Mail,
 			},
 			{
@@ -513,14 +513,14 @@ export const profileExample = {
 		socialLinks: [
 			{
 				label: 'Email',
-				href: 'mailto:bsitf21e68406@gcbskp.edu.pk',
+				href: 'mailto:zainqlandar@gmail.com',
 				icon: Mail,
 				className:
 					'p-3 rounded-lg border border-white/20 text-gray-400 hover:text-green-400 hover:border-green-500/50 transition-all duration-300',
 			},
 			{
 				label: 'Instagram',
-				href: 'https://instagram.com/zainqalandar.brand',
+				href: 'https://instagram.com/zainqalandar',
 				icon: Instagram,
 				className:
 					'p-3 rounded-lg border border-white/20 text-gray-400 hover:text-pink-400 hover:border-pink-500/50 transition-all duration-300',

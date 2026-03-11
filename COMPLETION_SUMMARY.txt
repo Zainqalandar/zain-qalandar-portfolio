@@ -231,7 +231,7 @@ For Navigation:
 📞 QUICK LINKS
 
   GitHub:  https://github.com/Zainqalandar
-  Email:   bsitf21e68406@gcbskp.edu.pk
+  Email:   zainqlandar@gmail.com
   Live:    http://localhost:3000 (npm run dev)
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
