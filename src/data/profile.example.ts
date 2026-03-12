@@ -44,14 +44,14 @@ export const profileExample = {
 		facebook: '#',
 	},
 	resume: {
-		resumeUrl: '/cv/ZainQalandar-FullStack(Mern)-CV-1.pdf',
+		resumeUrl: '/pro-cv/ZainQalandar-FrontEndDev-CV.pdf',
 		label: 'Resume',
 		ariaLabel: 'Open resume in a new tab',
 	},
 	primaryCta: {
 		label: 'Download CV',
-		href: '/cv/ZainQalandar-FullStack(Mern)-CV-1.pdf',
-		download: 'ZainQalandar-CV.pdf',
+		href: '/pro-cv/ZainQalandar-FrontEndDev-CV.pdf',
+		download: 'ZainQalandar-CVs.pdf',
 	},
 	secondaryCta: {
 		label: 'See my work',
