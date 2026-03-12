@@ -44,13 +44,13 @@ export const profile = {
 		facebook: '#',
 	},
 	resume: {
-		resumeUrl: '/pro-cv/ZainQalandar-FrontEndDev-CV.pdf',
+		resumeUrl: '/pro/ZainQalandar-FrontEndDev-CV.pdf',
 		label: 'Resume',
 		ariaLabel: 'Open resume in a new tab',
 	},
 	primaryCta: {
 		label: 'Download CV',
-		href: '/pro-cv/ZainQalandar-FrontEndDev-CV.pdf',
+		href: '/pro/ZainQalandar-FrontEndDev-CV.pdf',
 		download: 'ZainQalandar-CVs.pdf',
 	},
 	secondaryCta: {
